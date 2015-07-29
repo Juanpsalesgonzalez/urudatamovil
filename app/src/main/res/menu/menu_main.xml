@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.proyecto.urudatamobile.DisplayMessageActivity" >
+
+    <item
+        android:title="@string/menu_action_close"
+        android:id="@+id/action_close"
+        android:icon="@drawable/btn_close_normal"
+        app:showAsAction="always"
+        android:visible="true"
+        android:enabled="true"/>
+</menu>
+

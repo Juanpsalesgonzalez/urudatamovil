@@ -1,0 +1,124 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.proyecto.urudatamobile.LicenceActivity$PlaceholderFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_activity_licencia"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_fechaIni"
+        android:id="@+id/button_fechaIni"
+        android:onClick="cargaFechaInicio"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_fechaFin"
+        android:id="@+id/buttonfechaFin"
+        android:onClick="cargaFechaFin"
+        android:layout_below="@+id/button_fechaIni"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_fechaIni"
+        android:hint="@string/Hint_fecha_ini"
+        android:layout_alignTop="@+id/buttonfechaFin"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/editText_fechaFin"
+        android:layout_alignStart="@+id/editText_fechaFin" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_fechaFin"
+        android:hint="@string/Hint_fecha_fin"
+        android:layout_alignBottom="@+id/button_fechaIni"
+        android:layout_toRightOf="@+id/button_fechaIni"
+        android:layout_alignRight="@+id/radioGroup"
+        android:layout_alignEnd="@+id/radioGroup" />
+
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/buttonfechaFin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp">
+
+
+
+            <RadioButton android:id="@+id/radio_lic_comun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_lic_comun"
+                android:onClick="onRadioButtonClicked"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <RadioButton android:id="@+id/radio_lic_estudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_lic_estudio"
+                android:onClick="onRadioButtonClicked" />
+
+        <RadioButton android:id="@+id/radio_lic_enfermedad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:text="@string/radio_lic_enfermedad"
+                android:layout_alignParentLeft="true" />
+
+            <RadioButton android:id="@+id/radio_lic_otros"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_lic_otros"
+                android:onClick="onRadioButtonClicked" />
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_confirma_lic"
+        android:onClick="confirmaLicencia"
+        android:id="@+id/button_confirma_lic"
+        android:layout_gravity="right"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Button_Certificate"
+        android:id="@+id/button_cert"
+        android:onClick="SeleccionaCertificado"
+        android:layout_below="@+id/radioGroup"
+        android:layout_toStartOf="@+id/editText_fechaIni"
+        android:layout_toLeftOf="@+id/editText_fechaIni" />
+
+</RelativeLayout>

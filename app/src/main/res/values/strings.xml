@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CTR - Entrada/salida</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="main_id_label_text">Ingrese su usuario:</string>
+    <string name="main_pass_label_text">Ingrese su contraseña</string>
+    <string name="main_button_marca">Marcar</string>
+
+    <string name="title_activity_out_name">CTR - Entrada/salida</string>
+    <string name="outName_id_label">Id:</string>
+    <string name="outName_name_label">Nombre:</string>
+
+    <string name="menu_action_close">Salir</string>
+    <string name="button_close">Cerrar</string>
+    <string name="title_activity_ip">IPActivity</string>
+    <string name="button_licencia">Licencias</string>
+    <string name="button_fechaIni">Fecha Inicio</string>
+    <string name="button_fechaFin">Fecha Fin</string>
+
+    <string name="title_activity_licencia">CTR - Gestión de Licencias</string>
+    <string name="title_activity_licence_connect">connectando...</string>
+
+    <string name="radio_lic_comun">Licencia Reglamentaria</string>
+    <string name="radio_lic_estudio">Licencia por Estudio</string>
+    <string name="radio_lic_enfermedad">Licencia por Enfermedad</string>
+    <string name="radio_lic_otros">Licencia por otros motivos</string>
+    <string name="button_confirma_lic">Confirma</string>
+    <string name="Ok">Ok</string>
+    <string name="Nulo"> </string>
+
+    <string name="title_activity_photo">Seleccione el certificado</string>
+
+    <string name="Button_Certificate">Adjuntar Certificado</string>
+
+    <string name="Hint_fecha_ini">Fecha de inicio de licencia</string>
+    <string name="Hint_fecha_fin">Fecha de fin de licencia</string>
+    <string name="Hint_name">Nombre de Usuario</string>
+
+</resources>

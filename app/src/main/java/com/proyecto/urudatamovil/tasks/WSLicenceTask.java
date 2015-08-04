@@ -1,7 +1,12 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.tasks;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+
+import com.proyecto.urudatamovil.activities.LicenceConnectActivity;
+import com.proyecto.urudatamovil.objects.PeticionWebClient;
+import com.proyecto.urudatamovil.services.WSLoginServices;
+import com.proyecto.urudatamovil.services.WSPeticionServices;
 
 /**
  * Created by juan on 26/04/15.
@@ -28,12 +33,12 @@ public class WSLicenceTask extends AsyncTask <String, String, PeticionWebClient>
         comment = params[4];
         cert= params[5];
 
-        cookie=WSServices.getCookie(WSServices.loginToWS(user, pass));
+        cookie= WSLoginServices.getCookie(WSLoginServices.loginToWS(user, pass));
         if (cookie ==null){
             return null;
         }
 
-        PeticionWebClient peticion = WSServices.setLicense(user,cookie,initDate,endDate,comment);
+        PeticionWebClient peticion = WSPeticionServices.setLicense(user, cookie, initDate, endDate, comment);
         if (peticion ==null){
             return null;
         }

@@ -1,4 +1,4 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context="com.proyecto.urudatamobile.OutNameActivity" tools:ignore="MergeRootFrame" />
+    tools:context="com.proyecto.urudatamovil.OutNameActivity" tools:ignore="MergeRootFrame" />

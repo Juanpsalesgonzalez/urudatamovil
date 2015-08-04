@@ -1,9 +1,9 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,8 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.proyecto.urudatamovil.objects.PeticionWebClient;
+import com.proyecto.urudatamovil.R;
+import com.proyecto.urudatamovil.tasks.WSLicenceTask;
 
-public class LicenceConnectActivity extends ActionBarActivity {
+
+public class LicenceConnectActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

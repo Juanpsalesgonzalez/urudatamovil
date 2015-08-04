@@ -1,8 +1,13 @@
 
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.tasks;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+
+import com.proyecto.urudatamovil.activities.LicenceActivity;
+import com.proyecto.urudatamovil.objects.PeticionWebClient;
+import com.proyecto.urudatamovil.services.WSCertificadoServices;
+import com.proyecto.urudatamovil.services.WSLoginServices;
 
 /**
  * Created by juan on 26/04/15.
@@ -29,12 +34,12 @@ public class WSCertificadoTask extends AsyncTask <String, String, PeticionWebCli
         pId="40474";
         cert = params[3];
 
-        cookie=WSServices.getCookie(WSServices.loginToWS(user, pass));
+        cookie= WSLoginServices.getCookie(WSLoginServices.loginToWS(user, pass));
         if (cookie ==null){
             return null;
         }
 
-       PeticionWebClient peticion = WSServices.setCertificate(cookie,pId, cert);
+       PeticionWebClient peticion = WSCertificadoServices.setCertificate(cookie, pId, cert);
         if (peticion ==null){
             return null;
         }

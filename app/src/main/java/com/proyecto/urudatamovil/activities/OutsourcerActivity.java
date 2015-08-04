@@ -1,9 +1,10 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.activities;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,11 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class OutNameActivity extends ActionBarActivity {
+import com.proyecto.urudatamovil.R;
+import com.proyecto.urudatamovil.tasks.WSOutsourcerTask;
+
+public class OutsourcerActivity extends AppCompatActivity {
 
     String name;
-    private String pass;
-    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,8 @@ public class OutNameActivity extends ActionBarActivity {
         }
 
         Intent intent = getIntent();
-        user = intent.getStringExtra("name_outsourcer");
-        pass = intent.getStringExtra("pass_outsourcer");
+        String user = intent.getStringExtra("name_outsourcer");
+        String pass = intent.getStringExtra("pass_outsourcer");
         new WSOutsourcerTask(this).execute(user, pass);
     }
 
@@ -60,7 +62,7 @@ public class OutNameActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
     }
 

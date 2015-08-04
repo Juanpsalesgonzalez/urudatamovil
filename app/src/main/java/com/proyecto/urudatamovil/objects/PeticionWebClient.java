@@ -1,4 +1,4 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.objects;
 
 
 /**
@@ -15,6 +15,9 @@ public class PeticionWebClient {
     private Long  outsourcer;
     private String estado;
 
+    public PeticionWebClient(String petId){
+        idPeticion=Long.parseLong(petId);
+    }
     public PeticionWebClient(Long idPeticion, String inicio, String fin, Long outsourcer, String comentario) {
 
         this.idPeticion = idPeticion;

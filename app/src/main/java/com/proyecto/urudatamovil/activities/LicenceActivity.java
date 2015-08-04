@@ -1,4 +1,4 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import java.util.Calendar;
+import com.proyecto.urudatamovil.R;
+import com.proyecto.urudatamovil.objects.OutsourcerWebClient;
+import com.proyecto.urudatamovil.objects.PeticionWebClient;
+import com.proyecto.urudatamovil.tasks.WSCertificadoTask;
+import com.proyecto.urudatamovil.utils.DateUtils;
+import com.proyecto.urudatamovil.utils.FechaDialogFragment;
 
 
 public class LicenceActivity extends AppCompatActivity{
@@ -36,7 +42,11 @@ public class LicenceActivity extends AppCompatActivity{
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-
+        String hoy = DateUtils.currDate();
+        EditText fechaIni = (EditText) this.findViewById(R.id.editText_fechaFin);
+        fechaIni.setText(hoy);
+        EditText fechaFin = (EditText) this.findViewById(R.id.editText_fechaFin);
+        fechaFin.setText(hoy);
     }
 
 
@@ -73,7 +83,7 @@ public class LicenceActivity extends AppCompatActivity{
     }
 
     private void mostrarDatePicker(View v, TextView t) {
-        t.setText(HttpUtils.currDate());
+        t.setText(DateUtils.currDate());
         FechaDialogFragment fechaFragment = new FechaDialogFragment();
         fechaFragment.setActividadPadre(this);
         fechaFragment.setTextoPadre(t);
@@ -134,11 +144,6 @@ public class LicenceActivity extends AppCompatActivity{
         TextView endDateTV, initDateTV;
         String initDate, endDate;
 
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-
         endDateTV = (TextView)this.findViewById(R.id.editText_fechaIni);
         initDateTV = (TextView)this.findViewById(R.id.editText_fechaFin);
         initDate = initDateTV.getText().toString();
@@ -153,7 +158,7 @@ public class LicenceActivity extends AppCompatActivity{
         // Es necesario crear un Intent y un Activity para poder llamar
         // al Async Task. El Async Task solo se puede llamar del main/
 
-        Intent conIntent = new Intent(this,com.proyecto.urudatamovil.LicenceConnectActivity.class);
+        Intent conIntent = new Intent(this,LicenceConnectActivity.class);
         conIntent.putExtra("init",initDate);
         conIntent.putExtra("end",endDate);
         conIntent.putExtra("name",user);

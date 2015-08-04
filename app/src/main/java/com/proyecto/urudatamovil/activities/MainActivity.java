@@ -1,20 +1,21 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.activities;
 
-    import android.support.v7.app.ActionBarActivity;
-    import android.content.Intent;
-    import android.os.Bundle;
-    import android.view.Menu;
-    import android.support.v4.app.Fragment;
-    import android.view.MenuInflater;
-    import android.view.MenuItem;
-    import android.view.View;
-    import android.widget.EditText;
-    import android.view.LayoutInflater;
-    import android.view.ViewGroup;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+
+import com.proyecto.urudatamovil.R;
 
 
-
- public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
         /**
          * Called when the activity is first created.
@@ -71,10 +72,10 @@ package com.proyecto.urudatamovil;
      public void outById(View view){
 
          EditText e = (EditText)findViewById(R.id.id_outsourcer);
-         e.setText("Conectando");
-         Intent intent = new Intent(this,OutNameActivity.class);
+         Intent intent = new Intent(this,OutsourcerActivity.class);
          loadIntent(intent, view);
          startActivity(intent);
+         e.setText("Conectando");
      }
 
      public void licencia(View view){

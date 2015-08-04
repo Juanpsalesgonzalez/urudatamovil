@@ -1,4 +1,4 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.proyecto.urudatamovil.activities.PhotoActivity;
 
 import java.io.File;
 import java.util.ArrayList;

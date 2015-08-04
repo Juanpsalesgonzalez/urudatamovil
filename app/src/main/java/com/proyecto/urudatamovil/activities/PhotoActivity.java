@@ -1,4 +1,4 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+
+import com.proyecto.urudatamovil.adapters.PhotoAdapter;
+import com.proyecto.urudatamovil.R;
 
 import java.util.ArrayList;
 import java.util.List;

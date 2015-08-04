@@ -1,4 +1,4 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

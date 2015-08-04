@@ -1,11 +1,11 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.utils;
 
 import java.util.Calendar;
 
 /**
  * Created by juan on 07/03/15.
  */
-public class HttpUtils {
+public class DateUtils {
 
     public static String currDate(){
 
@@ -16,6 +16,11 @@ public class HttpUtils {
         int day = c.get(Calendar.DAY_OF_MONTH);
         date=day + "/" + month + "/" + year;
         return date;
+    }
+// TO DO.
+
+    public boolean validaFecha(String fecha){
+        return true;
     }
 
 }

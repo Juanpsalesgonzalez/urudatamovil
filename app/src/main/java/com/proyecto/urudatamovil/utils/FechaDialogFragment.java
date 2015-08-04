@@ -1,4 +1,4 @@
-package com.proyecto.urudatamovil;
+package com.proyecto.urudatamovil.utils;
 
 /**
  * Created by juan on 04/04/15.
@@ -10,6 +10,8 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.TextView;
+
+import com.proyecto.urudatamovil.activities.LicenceActivity;
 
 import java.util.Calendar;
 

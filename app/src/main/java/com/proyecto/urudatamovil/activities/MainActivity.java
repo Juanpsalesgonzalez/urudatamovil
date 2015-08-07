@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
         // return intent;
      }
 
+    private void verPeticiones(View v){
+
+    }
+
 
 
 // Fragmento de pantalla

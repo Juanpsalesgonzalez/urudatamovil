@@ -37,5 +37,7 @@
     <string name="Hint_fecha_ini">Fecha de inicio de licencia</string>
     <string name="Hint_fecha_fin">Fecha de fin de licencia</string>
     <string name="Hint_name">Nombre de Usuario</string>
+    <string name="title_activity_peticion">PeticionActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

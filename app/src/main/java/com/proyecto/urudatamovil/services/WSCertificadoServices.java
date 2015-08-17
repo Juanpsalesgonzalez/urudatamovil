@@ -34,13 +34,13 @@ import java.net.URL;
 public class WSCertificadoServices {
 
 
-   public static PeticionWebClient setCertificate(String cookie, String petId, String cert) {
+   public PeticionWebClient setCertificate(String cookie, String petId, String cert) {
        setCert(cookie,petId,cert);
        PeticionWebClient p = new PeticionWebClient(petId);
        return p;
    }
 
-    public static String setCert(String cookie, String petId, String cert) {
+    public String setCert(String cookie, String petId, String cert) {
 
        // Convertir a png comprimido.
        Bitmap bitmap=null;
@@ -99,7 +99,7 @@ public class WSCertificadoServices {
        return null;
    }
 
-    private static String readStream(InputStream in) {
+    private String readStream(InputStream in) {
         BufferedReader reader = null;
         StringBuilder builder = new StringBuilder();
         try {

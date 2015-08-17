@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class WSLoginServices {
 
-    public static ResponseEntity loginToWS(String user, String pass) {
+    public ResponseEntity loginToWS(String user, String pass) {
 
         String url = Constants.URL_LOGIN_PROCESS;
         RestTemplate rT = new RestTemplate(true); //Construye con Default Content Handlers
@@ -43,28 +43,33 @@ public class WSLoginServices {
         if (httpstatus.value() != 302) {
             return null;
         }
+
+        HttpHeaders receivedHeaders = response.getHeaders();
+        List<String> headerFieldValue = receivedHeaders.get("Location");
+        String Field = headerFieldValue.get(0);
+        if (Field.contains("login_error")){
+            return null;
+        }
+
         return response;
     }
 
-    public static String getCookie(ResponseEntity response) {
+    public String getCookie(ResponseEntity response) {
 
         String cookieField, cookieValue;
         String[] cookieSubFields;
-
-        try {
-            HttpHeaders headers = response.getHeaders();
-            System.out.println(headers.get("Set-Cookie").toString());
-            List<String> headerFieldValue = headers.get("Set-Cookie");
-            cookieField = headerFieldValue.get(0);
-            cookieSubFields = cookieField.split(";");//
-            //cookieLastFields = cookieSubFields[0].split("=");
-            //cookieValue = cookieLastFields[1];
-            cookieValue = cookieSubFields[0];  // Devuelve en formato JSESSIONID=xxxxxxxxx
-            return cookieValue;
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (response!=null) {
+            try {
+                HttpHeaders headers = response.getHeaders();
+                List<String> headerFieldValue = headers.get("Set-Cookie");
+                cookieField = headerFieldValue.get(0);
+                cookieSubFields = cookieField.split(";");//
+                cookieValue = cookieSubFields[0];  // Devuelve en formato JSESSIONID=xxxxxxxxx
+                return cookieValue;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
         return null;
 
     }

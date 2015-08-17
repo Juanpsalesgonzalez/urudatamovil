@@ -14,11 +14,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.proyecto.urudatamovil.R;
+import com.proyecto.urudatamovil.objects.OutsourcerWebClient;
 import com.proyecto.urudatamovil.tasks.WSOutsourcerTask;
+import com.proyecto.urudatamovil.utils.Constants;
 
 public class OutsourcerActivity extends AppCompatActivity {
 
-    String name;
+    private MainActivity actividad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +32,8 @@ public class OutsourcerActivity extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        String user = intent.getStringExtra("name_outsourcer");
-        String pass = intent.getStringExtra("pass_outsourcer");
+        String user = intent.getStringExtra("user");
+        String pass = intent.getStringExtra("pass");
         new WSOutsourcerTask(this).execute(user, pass);
     }
 
@@ -67,8 +69,9 @@ public class OutsourcerActivity extends AppCompatActivity {
     }
 
     private void salir(){
-        finish();
+        setResult(Constants.RESULT_OK,null);
         MainActivity.setQuit(true);
+        finish();
     }
 
     public void botonSalir(View view){
@@ -88,7 +91,21 @@ public class OutsourcerActivity extends AppCompatActivity {
     public void setStatus(String s){
         TextView t=(TextView)this.findViewById(R.id.label_status);
         t.setText(s);
+    }
 
+    public void confirmTaskFinished(OutsourcerWebClient out) {
+
+        if (out == null) {
+            setResult(Constants.LOGIN_FAILED,null);
+            finish();
+        } else {
+            String nombre = out.getNombre();
+            String id = out.getId();
+            this.setName(nombre);
+            this.setId(id);
+            this.setStatus("Marca realizada");
+
+        }
     }
 
     /**

@@ -1,10 +1,9 @@
 
 package com.proyecto.urudatamovil.tasks;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 
-import com.proyecto.urudatamovil.activities.LicenceActivity;
+import com.proyecto.urudatamovil.activities.CertificadoConnectActivity;
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.services.WSCertificadoServices;
 import com.proyecto.urudatamovil.services.WSLoginServices;
@@ -14,32 +13,31 @@ import com.proyecto.urudatamovil.services.WSLoginServices;
  */
 public class WSCertificadoTask extends AsyncTask <String, String, PeticionWebClient> {
 
-    private LicenceActivity actividad;
+    private CertificadoConnectActivity actividad;
+    private WSLoginServices wsLoginServices=new WSLoginServices();
+    private WSCertificadoServices wsCertificadoServices= new WSCertificadoServices();
 
-    public WSCertificadoTask(Activity a) {
-        System.out.println(a.toString());
-        actividad = (LicenceActivity) a;
+    public WSCertificadoTask(CertificadoConnectActivity a) {
+        actividad = a;
     }
 
-
-//    @Override
+    @Override
     protected PeticionWebClient doInBackground(String... params) {
 
-        String pId, cert,user, pass;
+        String petId, cert,user, pass;
         String cookie;
 
         user=params[0];
         pass=params[1];
-       // pId = params[2];
-        pId="40474";
-        cert = params[3];
+        petId=params[2];
+        cert=params[3];
 
-        cookie= WSLoginServices.getCookie(WSLoginServices.loginToWS(user, pass));
+        cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
         if (cookie ==null){
             return null;
         }
 
-       PeticionWebClient peticion = WSCertificadoServices.setCertificate(cookie, pId, cert);
+       PeticionWebClient peticion = wsCertificadoServices.setCertificate(cookie, petId, cert);
         if (peticion ==null){
             return null;
         }
@@ -48,7 +46,7 @@ public class WSCertificadoTask extends AsyncTask <String, String, PeticionWebCli
     }
     @Override
     protected void onPostExecute(PeticionWebClient peticion) {
-       actividad.confirmMessage(peticion);
+        actividad.confirmTaskFinished(peticion);
 
     }
 }

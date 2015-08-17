@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
  */
 public class WSOutsourcerServices {
 
-    public static OutsourcerWebClient outByName(String cookie, String user) {
+    public OutsourcerWebClient outByName(String cookie, String user) {
 
         String url;
 

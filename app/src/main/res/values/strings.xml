@@ -14,7 +14,6 @@
 
     <string name="menu_action_close">Salir</string>
     <string name="button_close">Cerrar</string>
-    <string name="title_activity_ip">IPActivity</string>
     <string name="button_licencia">Licencias</string>
     <string name="button_fechaIni">Fecha Inicio</string>
     <string name="button_fechaFin">Fecha Fin</string>
@@ -37,7 +36,14 @@
     <string name="Hint_fecha_ini">Fecha de inicio de licencia</string>
     <string name="Hint_fecha_fin">Fecha de fin de licencia</string>
     <string name="Hint_name">Nombre de Usuario</string>
-    <string name="title_activity_peticion">PeticionActivity</string>
+    <string name="title_activity_peticion">Peticiones</string>
+    <string name="title_activity_list_peticion">Listado de Peticiones</string>
+    <string name="title_activity_muestra_peticiones">Listado de Peticiones</string>
+    <string name="title_activity_peticion_detail">Detalles de la Peticion</string>
+    <string name="title_activity_urudata">UrudataActivity</string>
+
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_login">Conectando....</string>
+    <string name="title_activity_certificado_connect">CertificadoConnectActivity</string>
 
 </resources>

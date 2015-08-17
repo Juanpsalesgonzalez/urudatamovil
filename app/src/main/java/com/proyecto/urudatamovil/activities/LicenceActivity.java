@@ -6,32 +6,23 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.proyecto.urudatamovil.R;
-import com.proyecto.urudatamovil.objects.OutsourcerWebClient;
-import com.proyecto.urudatamovil.objects.PeticionWebClient;
-import com.proyecto.urudatamovil.tasks.WSCertificadoTask;
+import com.proyecto.urudatamovil.utils.Constants;
 import com.proyecto.urudatamovil.utils.DateUtils;
 import com.proyecto.urudatamovil.utils.FechaDialogFragment;
 
 
-public class LicenceActivity extends AppCompatActivity{
+public class LicenceActivity extends AppCompatActivity {
 
-
-    private String comment;
-    private String user;
-    private String pass;
-    private OutsourcerWebClient outsourcer;
-    private String cert =null;
-
-    public final static int PHOTO_REQUEST_CODE = 123;
-    String initDate, endDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,34 +33,54 @@ public class LicenceActivity extends AppCompatActivity{
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-        String hoy = DateUtils.currDate();
-        EditText fechaIni = (EditText) this.findViewById(R.id.editText_fechaFin);
-        fechaIni.setText(hoy);
-        EditText fechaFin = (EditText) this.findViewById(R.id.editText_fechaFin);
-        fechaFin.setText(hoy);
     }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        String hoy = DateUtils.currDate();
+        setDisplayFechaIni(hoy);
+        setDisplayFechaFin(hoy);
+        checkRadioButton();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_licencia, menu);
-        return true;
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_licencia, menu);
+        return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (item.getItemId() == R.id.menu_licencia_action_close) {
+            System.out.println("Cerrando  el MAIN....");
+            finish();
         }
-
         return super.onOptionsItemSelected(item);
+
+    }
+
+    // No son seters o getters, son para poner y leer de la Vista.
+    private void setDisplayFechaFin(String date) {
+        EditText editText = (EditText) this.findViewById(R.id.editText_fechaFin);
+        editText.setText(date);
+    }
+
+    private void setDisplayFechaIni(String date) {
+        EditText editText = (EditText) this.findViewById(R.id.editText_fechaIni);
+        editText.setText(date);
+    }
+
+    private String getDisplayFechaIni() {
+        EditText editText = (EditText) this.findViewById(R.id.editText_fechaIni);
+        return (editText.getText().toString());
+    }
+
+    private String getDisplayFechaFin() {
+        EditText editText = (EditText) this.findViewById(R.id.editText_fechaFin);
+        return (editText.getText().toString());
     }
 
     public void cargaFechaFin(View v) {
@@ -91,39 +102,45 @@ public class LicenceActivity extends AppCompatActivity{
     }
 
     public void setDate(TextView t, int ano, int mes, int dia) {
-        t.setText(new StringBuilder().append(dia).append("/")
-                .append(mes + 1).append("/")
-                .append(ano).append(" "));
+            t.setText(new StringBuilder().append(dia).append("/")
+                    .append(mes + 1).append("/")
+                    .append(ano).append(" "));
 
+        }
+
+    public void checkRadioButton(){
+        RadioGroup r= (RadioGroup)findViewById(R.id.radioGroup);
+        r.check(R.id.radio_lic_enfermedad);
     }
 
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-
+        String descripcion=null;
         // Check which radio button was clicked
         switch (view.getId()) {
             case R.id.radio_lic_comun:
                 if (checked) {
-                    comment = "Reglamentaria";
+                    descripcion = "Reglamentaria";
                     break;
                 }
             case R.id.radio_lic_enfermedad:
                 if (checked) {
-                    comment = "Enfermedad";
+                    descripcion = "Enfermedad";
                     break;
                 }
             case R.id.radio_lic_estudio:
                 if (checked) {
-                    comment = "Estudio";
+                    descripcion = "Estudio";
                     break;
                 }
             case R.id.radio_lic_otros:
                 if (checked) {
-                    comment = "Otros";
+                    descripcion = "Otros";
                     break;
                 }
         }
+        this.getIntent().putExtra("Descripcion", descripcion);
     }
 
     public void loginError() {
@@ -134,77 +151,64 @@ public class LicenceActivity extends AppCompatActivity{
         System.out.println("Error al confirmar licencia");
     }
 
-    public void setOutsourcer(OutsourcerWebClient o) {
-        if (outsourcer != null) {
-            outsourcer = o;
-        }
-    }
-    public void confirmaLicencia(View v){
-
-        TextView endDateTV, initDateTV;
-        String initDate, endDate;
-
-        endDateTV = (TextView)this.findViewById(R.id.editText_fechaIni);
-        initDateTV = (TextView)this.findViewById(R.id.editText_fechaFin);
-        initDate = initDateTV.getText().toString();
-        endDate = endDateTV.getText().toString();
-        if (comment == null){
-            comment="Licencia por Enfermedad";
-        }
-
-        Intent intent = getIntent();
-        user = intent.getStringExtra("name_outsourcer");
-        pass = intent.getStringExtra("pass_outsourcer");
-        // Es necesario crear un Intent y un Activity para poder llamar
-        // al Async Task. El Async Task solo se puede llamar del main/
-
-        Intent conIntent = new Intent(this,LicenceConnectActivity.class);
-        conIntent.putExtra("init",initDate);
-        conIntent.putExtra("end",endDate);
-        conIntent.putExtra("name",user);
-        conIntent.putExtra("pass",pass);
-        conIntent.putExtra("comment",comment);
-        conIntent.putExtra("certificado",cert);
-        startActivity(conIntent);
-        finish();
-    }
-
 
     public void SeleccionaCertificado(View v) {
 
         Intent certIntent = new Intent(this,PhotoActivity.class);
-        startActivityForResult(certIntent, PHOTO_REQUEST_CODE);
+        certIntent=loadIntent(certIntent);
+        startActivityForResult(certIntent, Constants.PHOTO_REQUEST_CODE);
     }
 
-    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void confirmaLicencia(View v){
+
+        // Es necesario crear un Intent y un Activity para poder llamar
+        // al Async Task. El Async Task solo se puede llamar del main/
+        Intent conIntent = new Intent(this,LicenceConnectActivity.class);
+        conIntent=loadIntent(conIntent);
+        startActivityForResult(conIntent, Constants.CONFIRM_LICENCE_CODE);
+    }
+
+    private Intent loadIntent(Intent intent){
+
+            TextView endDateTV, initDateTV;
+            String initDate, endDate, descripcion;
+
+            Intent currIntent = getIntent();
+            descripcion = currIntent.getStringExtra("descripcion");
+            if (descripcion == null){
+                descripcion="Licencia por Enfermedad";
+            }
+            String user = currIntent.getStringExtra("user");
+            String pass = currIntent.getStringExtra("pass");
+            String cert = currIntent.getStringExtra("cert");
+
+            intent.putExtra("init",getDisplayFechaIni());
+            intent.putExtra("end",getDisplayFechaFin());
+            intent.putExtra("name", user);
+            intent.putExtra("pass",pass);
+            intent.putExtra("descripcion",descripcion);
+            intent.putExtra("cert",cert);
+            return intent;
+        }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        String photo = null;
-
-        if (resultCode == RESULT_OK && requestCode == PHOTO_REQUEST_CODE) {
-
+        if (resultCode == RESULT_OK && requestCode == Constants.PHOTO_REQUEST_CODE) {
+            String photo = null;
             if (data != null) {
                 photo = data.getExtras().getString("photo");
             }
-
             if (photo != null) {
-                cert = photo;
-
+                this.getIntent().putExtra("cert",photo);
             }
-
-            Intent intent = getIntent();
-            user = intent.getStringExtra("name_outsourcer");
-            pass = intent.getStringExtra("pass_outsourcer");
-            new WSCertificadoTask(this).execute(user, pass,"1",cert);
+            confirmaLicencia(this.getCurrentFocus());
         }
+
     }
-
-    public void confirmMessage(PeticionWebClient o){
-        System.out.print("hola");
-    }
-
-
-    /**
+   /**
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {

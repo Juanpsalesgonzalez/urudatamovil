@@ -1,0 +1,145 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.proyecto.urudatamovil.activities.PeticionDetailActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nro de Solicitud:"
+        android:id="@+id/label_id"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Creacion:"
+        android:id="@+id/label_fecha_crea"
+        android:layout_below="@+id/label_id"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Inicio:"
+        android:id="@+id/label_fecha_ini"
+        android:layout_alignTop="@+id/value_fecha_inicio"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Fin:"
+        android:id="@+id/label_fecha_fin"
+        android:layout_below="@+id/label_fecha_ini"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Descripcion:"
+        android:id="@+id/label_tipo"
+        android:layout_below="@+id/label_fecha_fin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Estado:"
+        android:id="@+id/label_estado"
+        android:layout_marginTop="59dp"
+        android:layout_below="@+id/label_tipo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="id"
+        android:id="@+id/value_id"
+        android:gravity="end"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/value_fecha_fin"
+        android:layout_alignEnd="@+id/value_fecha_fin"
+        android:layout_toRightOf="@+id/label_fecha_crea"
+        android:layout_toEndOf="@+id/label_fecha_crea" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="fechacrea"
+        android:id="@+id/value_fecha_crea"
+        android:gravity="end"
+        android:layout_alignTop="@+id/label_fecha_crea"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/label_fecha_crea"
+        android:layout_toEndOf="@+id/label_fecha_crea" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="fechaini"
+        android:id="@+id/value_fecha_inicio"
+        android:gravity="end"
+        android:layout_below="@+id/value_fecha_crea"
+        android:layout_alignLeft="@+id/value_fecha_crea"
+        android:layout_alignStart="@+id/value_fecha_crea"
+        android:layout_alignRight="@+id/value_fecha_crea"
+        android:layout_alignEnd="@+id/value_fecha_crea" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="fechafin"
+        android:id="@+id/value_fecha_fin"
+        android:gravity="end"
+        android:layout_above="@+id/label_tipo"
+        android:layout_alignLeft="@+id/value_fecha_inicio"
+        android:layout_alignStart="@+id/value_fecha_inicio"
+        android:layout_alignRight="@+id/value_fecha_inicio"
+        android:layout_alignEnd="@+id/value_fecha_inicio" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Descripcion"
+        android:id="@+id/value_descripcion"
+        android:layout_below="@+id/label_tipo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/value_estado"
+        android:layout_alignEnd="@+id/value_estado" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="estado"
+        android:id="@+id/value_estado"
+        android:layout_below="@+id/label_estado"
+        android:layout_alignRight="@+id/value_fecha_fin"
+        android:layout_alignEnd="@+id/value_fecha_fin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

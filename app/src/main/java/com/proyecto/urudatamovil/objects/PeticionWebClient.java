@@ -1,30 +1,34 @@
 package com.proyecto.urudatamovil.objects;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by juan on 07/07/15.
  */
-public class PeticionWebClient {
+public class PeticionWebClient implements Parcelable{
 
+    // Atributos
     private Long idPeticion;
     private String inicio, fin;
     private String fechaSolicitud;
-    private String comentario;
+    private String descripcion;
     private String certificado;
     private String archivoCertificado;
     private Long  outsourcer;
     private String estado;
 
+
     public PeticionWebClient(String petId){
         idPeticion=Long.parseLong(petId);
     }
-    public PeticionWebClient(Long idPeticion, String inicio, String fin, Long outsourcer, String comentario) {
-
+    public PeticionWebClient(Long idPeticion, String inicio, String fin, Long outsourcer, String descripcion) {
         this.idPeticion = idPeticion;
         this.inicio = inicio;
         this.fin = fin;
         this.outsourcer = outsourcer;
-        this.comentario = comentario;
+        this.descripcion = descripcion;
     }
 
     public Long getIdPeticion() {
@@ -59,12 +63,12 @@ public class PeticionWebClient {
         this.fechaSolicitud = fechaSolicitud;
     }
 
-    public String getComentario() {
-        return comentario;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getCertificado() {
@@ -82,7 +86,6 @@ public class PeticionWebClient {
     public void setArchivoCertificado(String archivoCertificado) {
         this.archivoCertificado = archivoCertificado;
     }
-
     public Long getOutsourcer() {
         return outsourcer;
     }
@@ -98,4 +101,68 @@ public class PeticionWebClient {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    // Metodos para poder colocar el objeto en un Intent
+    public void readFromParcel(Parcel in ) {
+
+        idPeticion=in.readLong();
+        outsourcer=in.readLong();
+        inicio=in.readString();
+        fin=in.readString();
+        fechaSolicitud=in.readString();
+        descripcion=in.readString();
+        certificado=in.readString();
+        archivoCertificado=in.readString();
+        estado=in.readString();
+    }
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeLong(idPeticion);
+        out.writeLong(outsourcer);
+        out.writeString(inicio);
+        out.writeString(fin);
+        out.writeString(fechaSolicitud);
+        out.writeString(descripcion);
+        out.writeString(certificado);
+        out.writeString(archivoCertificado);
+        out.writeString(estado);
+    }
+    public int describeContents() {
+        return 0;
+    }
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public PeticionWebClient createFromParcel(Parcel in ) {
+            return new PeticionWebClient( in );
+        }
+
+        public PeticionWebClient[] newArray(int size) {
+            return new PeticionWebClient[size];
+        }
+    };
+
+     public PeticionWebClient(Parcel in) {
+            idPeticion=in.readLong();
+            outsourcer=in.readLong();
+            inicio=in.readString();
+            fin=in.readString();
+            fechaSolicitud=in.readString();
+            descripcion=in.readString();
+            certificado=in.readString();
+            archivoCertificado=in.readString();
+            estado=in.readString();
+            PeticionWebClient p = new PeticionWebClient(idPeticion,inicio, fin, outsourcer, descripcion);
+            p.setOutsourcer(outsourcer);
+            p.setEstado(estado);
+            p.setFechaSolicitud(fechaSolicitud);
+            p.setArchivoCertificado(archivoCertificado);
+            p.setCertificado(certificado);
+    }
+
+    public PeticionWebClient createFromParcel(Parcel in) {
+            return new PeticionWebClient(in);
+        }
+
+    public PeticionWebClient[] newArray(int size) {
+            return new PeticionWebClient[size];
+        }
 }

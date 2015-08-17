@@ -5,7 +5,7 @@
 
     <item
         android:title="@string/menu_action_close"
-        android:id="@+id/action_close"
+        android:id="@+id/menu_main_action_close"
         android:icon="@drawable/btn_close_normal"
         app:showAsAction="always"
         android:visible="true"

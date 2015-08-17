@@ -9,10 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.R;
+import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.tasks.WSLicenceTask;
 
 
@@ -32,10 +31,9 @@ public class LicenceConnectActivity extends AppCompatActivity {
         String endDate = conIntent.getStringExtra("end");
         String user = conIntent.getStringExtra("name");
         String pass = conIntent.getStringExtra("pass");
-        String comment = conIntent.getStringExtra("comment");
-        String certificado = conIntent.getStringExtra("certificado");
-        System.out.println(this.toString());
-        new WSLicenceTask(this).execute(user, pass, endDate, initDate, comment, certificado);
+        String descripcion = conIntent.getStringExtra("descripcion");
+        String cert = conIntent.getStringExtra("cert");
+        new WSLicenceTask(this).execute(user, pass, endDate, initDate, descripcion, cert);
     }
 
 
@@ -61,12 +59,14 @@ public class LicenceConnectActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void confirmMessage(PeticionWebClient p) {
-        TextView status = (TextView) this.findViewById(R.id.textView_status);
-        if (p!=null) {
-            status.setText("Solicitud Realizada : " + p.getIdPeticion().toString());
-        }   else {
-            status.setText("Error, Reintente");
+    public void confirmTaskFinished(PeticionWebClient p) {
+
+        if (p != null) {
+
+               Intent petDetail = new Intent(this,PeticionDetailActivity.class);
+               petDetail.putExtra("peticion",p);
+               startActivity(petDetail);
+               finish();
         }
     }
 

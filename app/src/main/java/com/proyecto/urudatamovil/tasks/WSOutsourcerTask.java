@@ -17,9 +17,13 @@ import com.proyecto.urudatamovil.services.WSOutsourcerServices;
 public class WSOutsourcerTask extends AsyncTask <String, String, OutsourcerWebClient> {
 
     private OutsourcerActivity actividad;
+    private WSLoginServices wsLoginServices;
+    private WSOutsourcerServices wsOutsourcerServices;
 
     public WSOutsourcerTask(Activity a){
         actividad = (OutsourcerActivity) a;
+        wsLoginServices = new WSLoginServices();
+        wsOutsourcerServices = new WSOutsourcerServices();
     }
 
 
@@ -32,12 +36,12 @@ public class WSOutsourcerTask extends AsyncTask <String, String, OutsourcerWebCl
         user=params[0];
         pass=params[1];
 
-        cookie= WSLoginServices.getCookie(WSLoginServices.loginToWS(user, pass));
+        cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
         if (cookie ==null){
 
             return null;
         }
-        OutsourcerWebClient outsourcer = WSOutsourcerServices.outByName(cookie, user);
+        OutsourcerWebClient outsourcer = wsOutsourcerServices.outByName(cookie, user);
         if (outsourcer ==null){
             return null;
         }
@@ -47,18 +51,8 @@ public class WSOutsourcerTask extends AsyncTask <String, String, OutsourcerWebCl
 
 
     @Override
-    protected void onPostExecute(OutsourcerWebClient outsourcer) {
-        if (outsourcer == null) {
-            actividad.setStatus("Error de Login");
-        }else {
-            String nombre = outsourcer.getNombre();
-            String id = outsourcer.getId();
-            actividad.setName(nombre);
-            actividad.setId(id);
-            actividad.setStatus("Marca realizada");
-
-        }
-
+    protected void onPostExecute(OutsourcerWebClient outsourcer){
+        actividad.confirmTaskFinished(outsourcer);
     }
 }
 

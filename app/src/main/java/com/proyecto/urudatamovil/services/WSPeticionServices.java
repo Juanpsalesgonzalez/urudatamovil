@@ -19,9 +19,11 @@ import java.util.LinkedHashMap;
 
 /**
  * Created by juan on 01/08/15.
+ * Modulo para las Peticiones. Centraliza en acceso a los datos de peticiones
  */
 public class WSPeticionServices {
 
+    @SuppressWarnings("unchecked")
     public PeticionWebClient setLicense(String user, String cookie, String initDate, String endDate, String descripcion) {
             String url;
             String url_user, url_idate, url_edate, url_desc;
@@ -74,7 +76,7 @@ public class WSPeticionServices {
             p.setDescripcion(descripcion);
             return p;
         }
-
+    @SuppressWarnings("unchecked")
     public  ArrayList<PeticionWebClient> listaPet(String user,String  cookie,String  fechaIni,String fechaFin,String  estado){
 
         /*String url = Constants.URL_LIST_PET;
@@ -89,7 +91,7 @@ public class WSPeticionServices {
             url=url + "&estado" + estado;
         } */
 
-        String url = Constants.URL_LIST_PET+"?user=dsilva";
+        String url = Constants.URL_LIST_PET+"?user=" + user;
 
         RestTemplate rT = new RestTemplate(true);
         HttpHeaders headers = new HttpHeaders();
@@ -100,6 +102,7 @@ public class WSPeticionServices {
         ResponseEntity<ArrayList> response = null;
         rT.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         try {
+
             response = rT.exchange(url, HttpMethod.GET, requestEntity, ArrayList.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,8 +112,8 @@ public class WSPeticionServices {
             System.out.println("Response NULL");
             //return null;
         }
-        ArrayList<PeticionWebClient> peticionesAL = responseToArray(response);
-        return peticionesAL;
+
+        return  responseToArray(response);
     }
 
     public ArrayList<PeticionWebClient> responseToArray(ResponseEntity<ArrayList> response) {
@@ -122,6 +125,7 @@ public class WSPeticionServices {
 
         for (int i = 0; i < petJSONArray.length(); i++) {
             try {
+                @SuppressWarnings("unchecked")
                 LinkedHashMap<String, Object> petHashMap = (LinkedHashMap<String, Object>) petJSONArray.get(i);
                 PeticionWebClient p = hashMapToPeticion(petHashMap);
                 peticiones.add(i,p);

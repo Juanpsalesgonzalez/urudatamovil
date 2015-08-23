@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Llamado al presionar Marcar
-    public void outById(View view) {
-        if (verificaDatos(view)==true) {
+    public void outMark(View view) {
+        if (verificaDatos(view)) {
             Intent i = saveViewStatus(view, Constants.ACTION_MARCA);
             if (i != null) {
                 //verificarUsuario(view);
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Llamado al presionar Licencia
     public void licencia(View view) {
-        if (verificaDatos(view)==true) {
+        if (verificaDatos(view)) {
             Intent i = saveViewStatus(view, Constants.ACTION_LICENCIA);
             if (i != null) {
                 verificarUsuario(view);
@@ -97,11 +97,21 @@ public class MainActivity extends AppCompatActivity {
 
     // Llamado al presionar Peticiones,
     public void verPeticiones(View view) {
-        if (verificaDatos(view)==true) {
+        if (verificaDatos(view)) {
             Intent i = saveViewStatus(view, Constants.ACTION_PETICION);
             if (i != null) {
                // verificarUsuario(view);
                 peticionVerificada();
+            }
+        }
+    }
+    // Llamado al presionar Asignaciones
+    public void verAsignaciones(View view){
+        if (verificaDatos(view)) {
+            Intent i = saveViewStatus(view, Constants.ACTION_ASIGNACIONES);
+            if (i!=null){
+                // verificarUsuario(view);
+                asignacionesVerificadas();
             }
         }
     }
@@ -148,6 +158,15 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, Constants.ACTION_MARCA);
         }
     }
+     public void asignacionesVerificadas(){
+         Intent currIntent = this.getIntent();
+         Intent intent = new Intent(this, ListAsignacionesActivity.class);
+         intent = copyIntent(currIntent, intent);
+         if (intent != null) {
+             startActivityForResult(intent, Constants.ACTION_ASIGNACIONES);
+         }
+
+     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -197,11 +216,7 @@ public class MainActivity extends AppCompatActivity {
      // Metodos auxiliares
 
     private boolean verificaDatos(View view){
-        if (getUser(view).equals("") || getPass(view).equals("")){
-            return false;
-        }else {
-            return true;
-        }
+        return !(getUser(view).equals("") || getPass(view).equals(""));
     }
     private Intent saveViewStatus(View view, int actionCode){
         Intent intent = new Intent(this,MainActivity.class);
@@ -215,13 +230,11 @@ public class MainActivity extends AppCompatActivity {
     }
     private String getUser(View v) {
         EditText editTextName = (EditText) findViewById(R.id.id_outsourcer);
-        String user = editTextName.getText().toString();
-        return user;
+        return editTextName.getText().toString();
     }
     private String getPass(View v){
         EditText editTextPass = (EditText) findViewById(R.id.pass_outsourcer);
-        String pass = editTextPass.getText().toString();
-        return  pass;
+        return editTextPass.getText().toString();
     }
     private Intent copyIntent(Intent currentI, Intent newI){
         newI.putExtra("user",currentI.getStringExtra("user"));

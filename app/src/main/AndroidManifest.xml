@@ -13,6 +13,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -94,10 +96,18 @@
         <activity
             android:name=".activities.CertificadoConnectActivity"
             android:label="@string/title_activity_certificado_connect"
-            android:parentActivityName=".activities.ListPeticionActivity">
+            android:parentActivityName=".activities.ListPeticionActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.proyecto.urudatamovil.activities.ListPeticionActivity" />
+        </activity>
+        <activity
+            android:name=".activities.CalendarActivity"
+            android:label="@string/title_activity_calendar" >
+        </activity>
+        <activity
+            android:name=".activities.ListAsignacionesActivity"
+            android:label="@string/title_activity_list_asignaciones" >
         </activity>
     </application>
 

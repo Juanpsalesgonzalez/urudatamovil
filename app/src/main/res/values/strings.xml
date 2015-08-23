@@ -45,5 +45,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_login">Conectando....</string>
     <string name="title_activity_certificado_connect">CertificadoConnectActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="title_activity_list_asignaciones">ListAsignacionesActivity</string>
 
 </resources>

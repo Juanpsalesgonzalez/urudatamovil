@@ -13,7 +13,7 @@ tools:context="com.proyecto.urudatamovil.activities.ListPeticionActivity">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="El puto list"/>
+        android:text="Solicitudes corrientes"/>
     <ListView android:layout_width="fill_parent"
         android:layout_height="364dp"
         android:id="@+id/listPeticiones">

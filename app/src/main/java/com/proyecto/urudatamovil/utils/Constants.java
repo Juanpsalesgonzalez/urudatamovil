@@ -2,6 +2,7 @@ package com.proyecto.urudatamovil.utils;
 
 /**
  * Created by juan on 26/04/15.
+ * Constantes utilizadas en el resto de los modulos.
  */
 public class Constants {
 
@@ -12,6 +13,7 @@ public class Constants {
     public static final String URL_LOGIN_PROCESS="http://" + ip_ctr + "/urudata/loginProcess";
     public static final String URL_UPLOAD_CERT="http://" + ip_ctr + "/urudata/rest/uploadCert";
     public static final String URL_LIST_PET="http://" + ip_ctr + "/urudata/rest/listaPet";
+    public static final String URL_LIST_ASIG="http://" + ip_ctr + "/urudata/rest/listAsig";
 
     public static final int LOGIN_REQUEST = 100;
     public static final int LOGIN_OK = 101;
@@ -19,6 +21,7 @@ public class Constants {
     public static final int ACTION_MARCA = 110;
     public static final int ACTION_LICENCIA = 111;
     public static final int ACTION_PETICION = 112;
+    public static final int ACTION_ASIGNACIONES = 113;
     public final static int PHOTO_REQUEST_CODE = 123;
     public final static int PETITION_DETAILS_CODE = 126;
     public final static int CONFIRM_LICENCE_CODE = 124;

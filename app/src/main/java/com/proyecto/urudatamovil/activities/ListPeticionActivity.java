@@ -1,7 +1,9 @@
 package com.proyecto.urudatamovil.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -9,21 +11,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.proyecto.urudatamovil.R;
 import com.proyecto.urudatamovil.adapters.PeticionAdapter;
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
+import com.proyecto.urudatamovil.services.AndrCalendarService;
 import com.proyecto.urudatamovil.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ListPeticionActivity extends AppCompatActivity {
 
 
     private ListView list;
-    private ArrayAdapter<PeticionWebClient> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,57 +78,71 @@ public class ListPeticionActivity extends AppCompatActivity {
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.peticiones_menu, menu);
+        inflater.inflate(R.menu.peticiones_context_menu, menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         // Accion a tomar segun el menu contextual
 
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int posicion = info.position;
-        PeticionWebClient peticion = (PeticionWebClient) list.getAdapter().getItem(posicion);
-        if (peticion != null) {
-            Long petIdL = peticion.getIdPeticion();
+        PeticionWebClient peticion;
+        // Si es en el submenu no puede crear la peticion.
+        if (item.getItemId()==R.id.peticiones_submenu_calendars){
 
-            switch (item.getItemId()) {
-                case R.id.peticiones_menu_certificado:
+            return insertInCalendar(item);
+        }
+        // Si es el primer menu contextual, se puede ver la peticion.
+        peticion = peticionFromMenu(item);
+        this.savePeticion(peticion);
+
+        switch (item.getItemId()) {
+            case R.id.peticiones_menu_certificado:
+                if (peticion != null) {
                     // Llama al selector de fotos.
                     Intent certIntent = new Intent(this, PhotoActivity.class);
-                    //certIntent.putExtra("user", this.getUser());
-                    //certIntent.putExtra("pass", this.getPass());
-                    //certIntent.putExtra("petId", petIdL.toString());
                     startActivityForResult(certIntent, Constants.PHOTO_REQUEST_CODE);
                     // Recuerda la peticion.
                     this.savePeticion(peticion);
-                    return true;
-                case R.id.peticiones_menu_detalles:
+                }
+                return true;
+            case R.id.peticiones_menu_detalles:
+                if (peticion != null) {
                     //Cargar detalles (peticion)
                     Intent petDetail = new Intent(this, PeticionDetailActivity.class);
                     petDetail.putExtra("peticion", peticion);
                     startActivity(petDetail);
-                    //finish();
-                    return true;
-            }
+                }//finish();
+                return true;
+            case R.id.peticiones_menu_calendario:
+                Menu submenuCal = item.getSubMenu();
+                submenuCal.clear();
+                HashMap<String, String> listCal =
+                        new AndrCalendarService(getContentResolver()).listCalendars();
+                for (Object o : listCal.entrySet()) {
+                    Map.Entry mapEntry = (Map.Entry) o;
+                    int index = Integer.parseInt(mapEntry.getKey().toString());
+                    submenuCal.add(0, R.id.peticiones_submenu_calendars, 0, mapEntry.getValue().toString());
+                }
+                return true;
         }
-        return super.onContextItemSelected(item);
+        return false;
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        String cert = null;
         if (resultCode == RESULT_OK && requestCode == Constants.PHOTO_REQUEST_CODE) {
             if (data != null) {
-                cert = data.getExtras().getString("photo");
-                PeticionWebClient pet=this.getPeticion();
-                if (pet != null){
+                String cert = data.getExtras().getString("photo");
+                PeticionWebClient pet = this.getPeticion();
+                if (pet != null) {
                     pet.setCertificado(cert);
                     Intent certConnect = new Intent(this, CertificadoConnectActivity.class);
-                    certConnect.putExtra("peticion",pet);
-                    certConnect.putExtra("user",this.getUser());
-                    certConnect.putExtra("pass",this.getPass());
+                    certConnect.putExtra("peticion", pet);
+                    certConnect.putExtra("user", this.getUser());
+                    certConnect.putExtra("pass", this.getPass());
                     startActivityForResult(certConnect, Constants.ACTION_CERTIFICATE);
                 }
             }
@@ -140,7 +157,7 @@ public class ListPeticionActivity extends AppCompatActivity {
         }
     }
 
-        // Auxiliares
+    // Auxiliares
 
     private String getUser() {
         Intent currentIntent = getIntent();
@@ -153,7 +170,7 @@ public class ListPeticionActivity extends AppCompatActivity {
     }
 
     private Long getPetId() {
-        PeticionWebClient pet=this.getPeticion();
+        PeticionWebClient pet = this.getPeticion();
         if (pet != null) {
             return pet.getIdPeticion();
         }
@@ -167,9 +184,60 @@ public class ListPeticionActivity extends AppCompatActivity {
 
     private PeticionWebClient getPeticion() {
         Intent currentIntent = getIntent();
-        PeticionWebClient pet = currentIntent.getParcelableExtra("peticion");
-        return pet;
+        return currentIntent.getParcelableExtra("peticion");
     }
 
+    private PeticionWebClient peticionFromMenu(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int posicion = info.position;
+        return (PeticionWebClient) list.getAdapter().getItem(posicion);
+    }
+    private int calendarFromMenu(MenuItem item) {
+        String key = null;
+        String calDesc = (String) item.getTitle();
+        HashMap<String,String> listCal =
+                new AndrCalendarService(getContentResolver()).listCalendars();
+        for (String k : listCal.keySet()) {
+            if (listCal.get(k).equals(calDesc)) {
+                key=k;
+            }
+        }
+        if (key!=null) {
+            return Integer.parseInt(key);
+        }else {
+            return 0;
+        }
+    }
+    private boolean insertInCalendar(MenuItem item) {
+
+        String message;
+        long calIdL = (long) calendarFromMenu(item);
+        PeticionWebClient peticion = this.getPeticion();
+        String t = peticion.getEstado();
+        boolean calResult=true;
+        if (calIdL != 0) {
+            if (peticion != null && t.equals("Aprobado")) {
+                calResult = new AndrCalendarService(this.getContentResolver())
+                        .addPeticionToCalendar(peticion, calIdL);
+                if (!calResult) {
+                    message = "No se pudo agregar al calendario";
+                } else {
+                    message = "Licencia agregada al calendario";
+                }
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder
+                        .setMessage(message)
+                        .setCancelable(false)
+                        .setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        });
+                alertDialogBuilder.show();
+            }
+        }
+        return calResult;
+
+    }
 
 }

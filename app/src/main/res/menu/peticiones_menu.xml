@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:id="@+id/peticiones_menu_certificado"
-            android:icon="@drawable/checked_32"
-            android:title="Adjuntar Certificado"
-            android:showAsAction="ifRoom"/>
-        <item android:id="@+id/peticiones_menu_detalles"
-            android:title="Mas detalles" />
-</menu>

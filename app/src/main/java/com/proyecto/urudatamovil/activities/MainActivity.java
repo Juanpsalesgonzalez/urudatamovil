@@ -105,16 +105,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    // Llamado al presionar Asignaciones
-    public void verAsignaciones(View view){
-        if (verificaDatos(view)) {
-            Intent i = saveViewStatus(view, Constants.ACTION_ASIGNACIONES);
-            if (i!=null){
-                // verificarUsuario(view);
-                asignacionesVerificadas();
-            }
-        }
-    }
+
 
     // Verifica usuario y pass antes de continuar
     public void verificarUsuario(View v) {
@@ -158,15 +149,7 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, Constants.ACTION_MARCA);
         }
     }
-     public void asignacionesVerificadas(){
-         Intent currIntent = this.getIntent();
-         Intent intent = new Intent(this, ListAsignacionesActivity.class);
-         intent = copyIntent(currIntent, intent);
-         if (intent != null) {
-             startActivityForResult(intent, Constants.ACTION_ASIGNACIONES);
-         }
 
-     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

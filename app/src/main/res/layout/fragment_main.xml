@@ -80,15 +80,4 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="39dp" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Asignaciones "
-        android:id="@+id/button_asignaciones"
-        android:onClick="verAsignaciones"
-        android:layout_alignBottom="@+id/button_solicitudes"
-        android:layout_alignLeft="@+id/button_licencia"
-        android:layout_alignStart="@+id/button_licencia" />
-
 </RelativeLayout>

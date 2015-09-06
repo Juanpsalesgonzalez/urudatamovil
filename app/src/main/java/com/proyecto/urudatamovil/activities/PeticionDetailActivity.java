@@ -54,14 +54,6 @@ public class PeticionDetailActivity extends AppCompatActivity {
             editText.setText(petId.toString());
         }
 
-        String fechaSol=peticion.getFechaSolicitud();
-        editText = (TextView) findViewById(R.id.value_fecha_crea);
-        if (fechaSol!=null) {
-            editText.setText(fechaSol);
-        }else {
-            editText.setText("");
-        }
-
         String fechaIni=peticion.getInicio();
         editText = (TextView) findViewById(R.id.value_fecha_inicio);
         if (fechaIni!=null) {

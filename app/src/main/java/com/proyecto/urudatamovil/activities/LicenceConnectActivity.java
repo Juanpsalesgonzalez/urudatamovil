@@ -61,6 +61,7 @@ public class LicenceConnectActivity extends AppCompatActivity {
 
     public void confirmTaskFinished(PeticionWebClient p) {
 
+
         if (p != null) {
 
                Intent petDetail = new Intent(this,PeticionDetailActivity.class);
@@ -68,6 +69,7 @@ public class LicenceConnectActivity extends AppCompatActivity {
                startActivity(petDetail);
                finish();
         }
+        finish();
     }
 
     public void onOkButtonClicked(View v){

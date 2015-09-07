@@ -31,10 +31,10 @@ public class WSLoginTask extends AsyncTask<String,String,String> {
         if (cookie == null) {
             return null;
         }
-        return "ok";
+        return cookie;
     }
 
-    protected void onPostExecute(String result){
-            actividad.loginResult(result);
+    protected void onPostExecute(String cookie){
+        actividad.loginResult(cookie);
     }
 }

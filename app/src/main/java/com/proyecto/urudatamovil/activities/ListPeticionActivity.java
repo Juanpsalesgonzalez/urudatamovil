@@ -41,6 +41,7 @@ public class ListPeticionActivity extends AppCompatActivity {
         String pass = conIntent.getStringExtra("pass");
         String comment = null;
         String certificado = null;
+
         new com.proyecto.urudatamovil.tasks.WSPeticionTask(this).execute(user, pass, endDate, initDate, comment, certificado);
 
     }

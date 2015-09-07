@@ -42,19 +42,18 @@ public class PeticionAdapter extends ArrayAdapter<PeticionWebClient> {
 
         // Change icon based on name
         String s = p.getEstado();
-
-        System.out.println(s);
-
-        if (s.equals("Aprobado")) {
-            imageView.setImageResource(R.drawable.checked_32);
-        } else if (s.equals("No Aprobado")) {
-            imageView.setImageResource(R.drawable.cancel_32);
-        } else if (s.equals("Esperando Aprobacion")) {
-            imageView.setImageResource(R.drawable.process_32);
-        } else {
-            imageView.setImageResource(R.drawable.question_32);
+        if (s==null){
+            s="Esperando Aprobacion"; // El estado no puede ser nulo
         }
-
+        if (s.equals("Aprobado")) {
+                imageView.setImageResource(R.drawable.checked_32);
+            } else if (s.equals("No Aprobado")) {
+                imageView.setImageResource(R.drawable.cancel_32);
+            } else if (s.equals("Esperando Aprobacion")) {
+                imageView.setImageResource(R.drawable.process_32);
+            } else {
+                imageView.setImageResource(R.drawable.question_32);
+            }
         return rowView;
     }
 

@@ -81,9 +81,13 @@ public class PeticionDetailActivity extends AppCompatActivity {
         String estado=peticion.getEstado();
         editText = (TextView) findViewById(R.id.value_estado);
         if (estado!=null) {
-            editText.setText(estado);
+            if (estado.equalsIgnoreCase("null")){
+                editText.setText("Esperando Aprobación");
+            }else {
+                editText.setText(estado);
+            }
         }else {
-            editText.setText("EE");
+            editText.setText("Esperando Aprobación");
         }
     }
 }

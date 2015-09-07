@@ -43,11 +43,13 @@ public class LoginActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void loginResult(String res) {
-        if (res == null) {
+    public void loginResult(String cookie) {
+        if (cookie == null) {
             setResult(Constants.LOGIN_FAILED,null);
         } else {
-            setResult(Constants.LOGIN_OK,null);
+            Intent cookieIntent=new Intent();
+            cookieIntent.putExtra("cookie",cookie);
+            setResult(Constants.LOGIN_OK,cookieIntent);
         }
         finish();
     }

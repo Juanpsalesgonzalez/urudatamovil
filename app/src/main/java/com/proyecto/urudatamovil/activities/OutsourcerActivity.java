@@ -20,7 +20,7 @@ import com.proyecto.urudatamovil.utils.Constants;
 
 public class OutsourcerActivity extends AppCompatActivity {
 
-    private MainActivity actividad;
+    private MainActivityOutsourcer actividad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,7 @@ public class OutsourcerActivity extends AppCompatActivity {
 
     private void salir(){
         setResult(Constants.RESULT_OK,null);
-        MainActivity.setQuit(true);
+        MainActivityOutsourcer.setQuit(true);
         finish();
     }
 

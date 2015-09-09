@@ -10,7 +10,7 @@ import com.proyecto.urudatamovil.R;
 import com.proyecto.urudatamovil.tasks.WSLoginTask;
 import com.proyecto.urudatamovil.utils.Constants;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginConnectActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

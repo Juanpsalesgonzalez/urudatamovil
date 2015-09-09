@@ -43,7 +43,6 @@ public class WSPeticionTask extends AsyncTask <String, String, ArrayList<Peticio
             return null;
         }
         listaPet= wsPeticionServices.listaPet(user, cookie, fechaIni, fechaFin, estado);
-
         return listaPet;
     }
 

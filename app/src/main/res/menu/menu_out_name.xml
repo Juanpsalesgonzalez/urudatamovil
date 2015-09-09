@@ -11,7 +11,5 @@
         app:showAsAction="always"
         android:enabled="true"/>
 
-
-
 </menu>
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_security_menu" >
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/security_menu_olvidar"
+            android:checked="true"
+            android:title="Olvidar usuario/password"/>
+        <item android:id="@+id/security_menu_recordar_usuario"
+            android:title="Recordar usuario" />
+        <item android:id="@+id/security_recordar_todo"
+            android:title="Recordar usuario y password">
+        </item>
+    </group>
+</menu>
+

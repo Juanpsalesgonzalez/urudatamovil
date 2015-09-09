@@ -2,7 +2,7 @@ package com.proyecto.urudatamovil.tasks;
 
 import android.os.AsyncTask;
 
-import com.proyecto.urudatamovil.activities.LoginActivity;
+import com.proyecto.urudatamovil.activities.LoginConnectActivity;
 import com.proyecto.urudatamovil.services.WSLoginServices;
 
 /**
@@ -12,10 +12,10 @@ public class WSLoginTask extends AsyncTask<String,String,String> {
 
     //Verifica Login. Devuelve un objeto Outsourcer o null
 
-    LoginActivity actividad;
+    LoginConnectActivity actividad;
     WSLoginServices wsLoginServices;
 
-    public WSLoginTask(LoginActivity a) {
+    public WSLoginTask(LoginConnectActivity a) {
         actividad = a;
         wsLoginServices = new WSLoginServices();
     }
@@ -31,6 +31,7 @@ public class WSLoginTask extends AsyncTask<String,String,String> {
         if (cookie == null) {
             return null;
         }
+
         return cookie;
     }
 

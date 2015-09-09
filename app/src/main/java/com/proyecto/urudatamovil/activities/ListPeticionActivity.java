@@ -41,7 +41,6 @@ public class ListPeticionActivity extends AppCompatActivity {
         String pass = conIntent.getStringExtra("pass");
         String comment = null;
         String certificado = null;
-
         new com.proyecto.urudatamovil.tasks.WSPeticionTask(this).execute(user, pass, endDate, initDate, comment, certificado);
 
     }
@@ -56,7 +55,7 @@ public class ListPeticionActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_list_peticion, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -69,6 +68,10 @@ public class ListPeticionActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if (item.getItemId() == R.id.menu_main_action_close) {
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

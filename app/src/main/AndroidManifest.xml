@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="20" />
+        android:targetSdkVersion="22" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -21,7 +21,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat" >
-        <activity android:name="com.proyecto.urudatamovil.activities.MainActivity" >
+        <activity android:name=".activities.MainActivityOutsourcer" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,24 +31,19 @@
         <activity
             android:name=".activities.OutsourcerActivity"
             android:label="@string/title_activity_out_name"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName=".activities.MainActivityOutsourcer"
             android:theme="@style/Theme.AppCompat" >
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.proyecto.urudatamovil.activities.MainActivity" />
         </activity>
         <activity
             android:name=".activities.LicenceActivity"
             android:label="@string/title_activity_licencia"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName=".activities.MainActivityOutsourcer"
             android:theme="@style/Theme.AppCompat" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.proyecto.urudatamovil.activities.MainActivity" />
+                android:value=".activities.MainActivityOutsourcer" />
         </activity>
         <activity
             android:name=".activities.LicenceConnectActivity"
@@ -71,26 +66,27 @@
         <activity
             android:name=".activities.ListPeticionActivity"
             android:label="CTR - Solicitudes Recientes"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" >
+            android:parentActivityName=".activities.MainActivityOutsourcer"
+            android:theme="@style/Theme.AppCompat" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.proyecto.urudatamovil.activities.MainActivity" />
+                android:value=".activities.MainActivityOutsourcer" />
         </activity>
         <activity
             android:name=".activities.PeticionDetailActivity"
             android:label="@string/title_activity_peticion_detail"
-            android:parentActivityName=".activities.MainActivity" >
+            android:parentActivityName=".activities.MainActivityOutsourcer"
+            android:theme="@style/Theme.AppCompat" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.proyecto.urudatamovil.activities.MainActivity" />
+                android:value=".activities.MainActivityOutsourcer" />
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.LoginConnectActivity"
             android:label="@string/title_activity_login" >
         </activity>
         <activity

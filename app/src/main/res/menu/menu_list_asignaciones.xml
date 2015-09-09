@@ -4,4 +4,12 @@
     tools:context="com.proyecto.urudatamovil.activities.ListAsignacionesActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item
+        android:title="@string/menu_action_close"
+        android:id="@+id/menu_main_action_close"
+        android:icon="@drawable/btn_close_normal"
+        app:showAsAction="always"
+        android:visible="true"
+        android:enabled="true"/>
+
 </menu>

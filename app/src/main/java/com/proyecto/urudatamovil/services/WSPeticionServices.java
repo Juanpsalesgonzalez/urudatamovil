@@ -4,7 +4,6 @@ import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.utils.Constants;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.ContentCodingType;
 import org.springframework.http.HttpEntity;
@@ -15,7 +14,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by juan on 01/08/15.
@@ -126,17 +125,18 @@ public class WSPeticionServices {
         for (int i = 0; i < petJSONArray.length(); i++) {
             try {
                 @SuppressWarnings("unchecked")
-                LinkedHashMap<String, Object> petHashMap = (LinkedHashMap<String, Object>) petJSONArray.get(i);
+                Map<String, Object> petHashMap = (Map<String, Object>) petJSONArray.get(i);
                 PeticionWebClient p = hashMapToPeticion(petHashMap);
                 peticiones.add(i,p);
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
+                return null;
             }
         }
         return peticiones;
     }
 
-    public PeticionWebClient hashMapToPeticion(LinkedHashMap<String, Object> petHashMap){
+    public PeticionWebClient hashMapToPeticion(Map<String, Object> petHashMap){
 
         Long idLong,idOutsourcerLong;
         Integer id, idOutsourcer;

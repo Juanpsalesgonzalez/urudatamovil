@@ -45,18 +45,16 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_login_outsourcer, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         if (item.getItemId() == R.id.menu_main_action_close) {
             olvidarPass();
             finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -145,8 +143,8 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
     }
 
     public void loginOutsoucer(View v) {
-        String user = getUser(v);
-        String pass = getPass(v);
+        String user = getUser();
+        String pass = getPass();
         if (!(user.equals("") || pass.equals(""))) {
             Intent loginIntent = new Intent(this, LoginConnectActivity.class);
             loginIntent.putExtra("user", user);
@@ -156,19 +154,32 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
+        super.onActivityResult(requestCode, resultCode, resultIntent);
         if (resultCode == Constants.LOGIN_FAILED) {
-            loginError();
+            errorMessage("Usuario o clave invalidos");
         } else{
-           // saveViewStatus()
-           // INICIAR MAIN ACITIVITY OUTSOURCER (USER, PASS, COOKEI)
+            String cookie = resultIntent.getStringExtra("cookie");
+            if (cookie!=null){
+                almacenarDatos(getUser(),getPass());
+                Intent mainIntent = new Intent(this,MainActivityOutsourcer.class);
+                mainIntent.putExtra("cookie",resultIntent.getStringExtra("cookie"));
+                mainIntent.putExtra("name",resultIntent.getStringExtra("name"));
+                mainIntent.putExtra("id",resultIntent.getStringExtra("id"));
+                mainIntent.putExtra("saldo",resultIntent.getStringExtra("saldo"));
+                mainIntent.putExtra("user",getUser());
+                mainIntent.putExtra("pass",getPass());
+                startActivity(mainIntent);
+                finish();
+            }else {
+                errorMessage("Error de conexión. Reintente");
+            }
         }
     }
 
-    public void loginError() {
+    public void errorMessage(String message) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Usuario o clave Invalidos");
+        alertDialogBuilder.setTitle(message);
         alertDialogBuilder
                 .setMessage("")
                 .setCancelable(false)
@@ -187,39 +198,17 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
 
     // Metodos auxiliares
 
-    private boolean verificaDatos(View view) {
-        String user = getUser(view);
-        String pass = getPass(view);
-        if ((!user.equals("")) && (!pass.equals(""))) {
-            almacenarDatos(user,pass );
-            return true;
-        }
-        return false;
-    }
-
-    private Intent saveViewStatus(View view, int actionCode) {
-        Intent intent = new Intent(this, LoginOutsourcerActivity.class);
-        intent = loadIntent(intent, view);
-        if (intent != null) {
-            intent.putExtra("action", actionCode);
-            intent.putExtra("user", getUser(view));
-            intent.putExtra("pass", getPass(view));
-            this.setIntent(intent);
-        }
-        return intent;
-
-    }
 
 //----------------------------------------------------
 // Datos de sesion -
 //----------------------------------------------------
 
-    private String getUser(View v) {
+    private String getUser() {
         EditText editTextName = (EditText) findViewById(R.id.id_outsourcer);
         return editTextName.getText().toString();
     }
 
-    private String getPass(View v) {
+    private String getPass() {
         EditText editTextPass = (EditText) findViewById(R.id.pass_outsourcer);
         return editTextPass.getText().toString();
     }
@@ -234,9 +223,9 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
         editTextPass.setText(pass);
     }
 
-    private Intent loadIntent(Intent intent, View view) {
-        String name = getUser(view);
-        String pass = getPass(view);
+    private Intent loadIntent(Intent intent) {
+        String name = getUser();
+        String pass = getPass();
         if (name.equals("") || pass.equals("")) {
             intent = null;
         } else {

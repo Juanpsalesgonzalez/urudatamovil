@@ -12,13 +12,6 @@
         app:showAsAction="always"
         android:visible="true"
         android:enabled="true"/>
-    <item
-        android:title="Opciones"
-        android:id="@+id/menu_main_opciones"
-        android:icon="@drawable/ic_action"
-        app:showAsAction="always"
-        android:visible="true"
-        android:onClick="showPopup"
-        android:enabled="true"/>
+
 </menu>
 

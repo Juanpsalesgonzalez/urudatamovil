@@ -81,7 +81,7 @@ public class MainActivityOutsourcer extends AppCompatActivity {
                 finish();
             }
             TextView textName= (TextView) findViewById(R.id.textName);
-            textName.setText(getName());
+            textName.setText(getName() + "\n" + getCel() + "\n" + getDir());
             String marca="Entrada";
 
             final ImageView imageSem = (ImageView) findViewById(R.id.imageView_Semaforo);
@@ -187,6 +187,12 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         return getIntent().getStringExtra("MarkIn");
     }
 
+    private String getCel(){
+        return getIntent().getStringExtra("cel");
+    }
+    private String getDir(){
+        return getIntent().getStringExtra("dir");
+    }
 
 // Fragmento de pantalla
 

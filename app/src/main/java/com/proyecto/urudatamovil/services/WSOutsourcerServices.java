@@ -41,17 +41,32 @@ public class WSOutsourcerServices {
         if (response == null) {
             return null;
         }
-        String s = response.getBody();
-        String n = null;
-        String i = null;
+        String body = response.getBody();
+        String nombre = null;
+        String id = null;
+        String markIn = null;
+        String markOut = null;
+        String cel = null;
+        String dir=null;
         try {
-            JSONObject j = new JSONObject(s);
-            n = j.get("nombre").toString();
-            i = j.get("id").toString();
+            JSONObject j = new JSONObject(body);
+            nombre = j.get("nombre").toString();
+            id = j.get("id").toString();
+            markIn = j.get("markIn").toString();
+            markOut = j.get("markOut").toString();
+            dir=j.get("direccion").toString();
+            cel=j.get("celular").toString();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return new OutsourcerWebClient(n, i);
+        OutsourcerWebClient out = new OutsourcerWebClient(nombre, id);
+        out.setMarkIn(markIn);
+        out.setMarkOut(markOut);
+        out.setCel(cel);
+        out.setDireccion(dir);
+        return out;
+
     }
 }

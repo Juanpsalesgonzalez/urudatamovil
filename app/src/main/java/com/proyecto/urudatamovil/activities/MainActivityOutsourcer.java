@@ -16,7 +16,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.proyecto.urudatamovil.R;
 import com.proyecto.urudatamovil.utils.Constants;
@@ -85,31 +84,18 @@ public class MainActivityOutsourcer extends AppCompatActivity {
             textName.setText(getName());
             String marca="Entrada";
 
-            final ToggleButton toggle_Entrada_Salida = (ToggleButton) findViewById(R.id.toggleButton_Entrada_Salida);
             final ImageView imageSem = (ImageView) findViewById(R.id.imageView_Semaforo);
             final Switch switchES = (Switch) findViewById(R.id.switchEntradaSalida);
 
-            toggle_Entrada_Salida.setTextOn("Entrada");
             switchES.setTextOn("Entrada");
-            toggle_Entrada_Salida.setTextOff("Salida");
             switchES.setTextOff("Salida");
             switchES.setTrackResource(R.drawable.abc_switch_thumb_material);
 
             if (marca.equals("Entrada")) {
-                imageSem.setImageResource(R.drawable.rojo);
+                imageSem.setImageResource(R.drawable.rojo24);
             }else {
-                imageSem.setImageResource(R.drawable.verde);
+                imageSem.setImageResource(R.drawable.verde24);
             }
-
-            toggle_Entrada_Salida.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        imageSem.setImageResource(R.drawable.rojo);
-                    } else {
-                        imageSem.setImageResource(R.drawable.verde);
-                    }
-                }
-            });
 
             switchES.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -118,9 +104,9 @@ public class MainActivityOutsourcer extends AppCompatActivity {
                                              boolean isChecked) {
 
                     if (isChecked) {
-                        imageSem.setImageResource(R.drawable.rojo);
+                        imageSem.setImageResource(R.drawable.rojo24);
                     } else {
-                        imageSem.setImageResource(R.drawable.verde);
+                        imageSem.setImageResource(R.drawable.verde24);
                     }
 
                 }

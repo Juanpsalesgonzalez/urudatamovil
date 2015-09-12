@@ -82,7 +82,18 @@ public class MainActivityOutsourcer extends AppCompatActivity {
             }
             TextView textName= (TextView) findViewById(R.id.textName);
             textName.setText(getName() + "\n" + getCel() + "\n" + getDir());
-            String marca="Entrada";
+            String markIn, markOut;
+            String estado=null;
+            String marca = null;
+            markIn=getMarkIn();
+            markOut=getMarkOut();
+            if (markIn==null){
+                estado="out";
+            }else {
+                if (markOut==null){
+                    estado="in";
+                }
+            }
 
             final ImageView imageSem = (ImageView) findViewById(R.id.imageView_Semaforo);
             final Switch switchES = (Switch) findViewById(R.id.switchEntradaSalida);
@@ -96,13 +107,17 @@ public class MainActivityOutsourcer extends AppCompatActivity {
             }else {
                 imageSem.setImageResource(R.drawable.verde24);
             }
-
+            if (estado.equals("in")){
+                switchES.setChecked(true);
+            }else{
+                switchES.setChecked(false);
+            }
             switchES.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView,
                                              boolean isChecked) {
-
+                    marcarES();
                     if (isChecked) {
                         imageSem.setImageResource(R.drawable.rojo24);
                     } else {
@@ -111,13 +126,24 @@ public class MainActivityOutsourcer extends AppCompatActivity {
 
                 }
             });
-
     }
 
+    private void cambiarSwitch(){
+        final Switch switchES = (Switch) findViewById(R.id.switchEntradaSalida);
+        if (switchES.isChecked()){
+            switchES.setChecked(false);
+        }else {
+            switchES.setChecked(true);
+        }
+    }
 
     // Llamado al presionar Marcar
-    public void outMark(View view) {
-
+    public void marcarES() {
+        Intent marcaIntent = new Intent(this, OutsourcerActivity.class);
+        marcaIntent.putExtra("cookie", getCookie());
+        marcaIntent.putExtra("user",getUser());
+        marcaIntent.putExtra("pass",getPass());
+        startActivityForResult(marcaIntent,Constants.ACTION_MARCA,null);
     }
 
     // Llamado al presionar Licencia
@@ -137,11 +163,10 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         if (resultCode == Constants.LOGIN_FAILED) {
             errorMessage("Error");
         } else {
-            int action = this.getIntent().getIntExtra("action", 0);
-            switch (action) {
+            switch (requestCode) {
                 case Constants.ACTION_MARCA:
                     if (resultCode != Constants.RESULT_OK) {
-                        System.out.println("hola");
+                        cambiarSwitch();
                     } else {
                         finish();
                     }
@@ -181,17 +206,28 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         return getIntent().getStringExtra("saldo");
     }
     private String getId(){
-        return getIntent().getStringExtra("Id");
+        return getIntent().getStringExtra("id");
     }
     private String getMarkIn(){
-        return getIntent().getStringExtra("MarkIn");
+        return getIntent().getStringExtra("markIn");
     }
-
+    private String getMarkOut(){
+        return getIntent().getStringExtra("markOut");
+    }
+    private String getCookie() {
+        return getIntent().getStringExtra("cookie");
+    }
     private String getCel(){
         return getIntent().getStringExtra("cel");
     }
     private String getDir(){
         return getIntent().getStringExtra("dir");
+    }
+    private String getUser(){
+        return getIntent().getStringExtra("user");
+    }
+    private String getPass(){
+        return getIntent().getStringExtra("Pass");
     }
 
 // Fragmento de pantalla

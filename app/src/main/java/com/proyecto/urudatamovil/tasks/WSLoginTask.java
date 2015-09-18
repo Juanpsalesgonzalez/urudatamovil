@@ -47,6 +47,10 @@ public class WSLoginTask extends AsyncTask<String,String,Intent> {
         result.putExtra("pass",pass);
         result.putExtra("name",outsourcer.getNombre());
         result.putExtra("id",outsourcer.getId());
+        result.putExtra("markIn",outsourcer.getMarkIn());
+        result.putExtra("markOut",outsourcer.getMarkOut());
+        result.putExtra("cel",outsourcer.getCel());
+        result.putExtra("dir",outsourcer.getDireccion());
         result.putExtra("Saldo","10");
 
         return result;

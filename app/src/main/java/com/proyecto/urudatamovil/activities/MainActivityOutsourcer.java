@@ -87,11 +87,13 @@ public class MainActivityOutsourcer extends AppCompatActivity {
             String marca = null;
             markIn=getMarkIn();
             markOut=getMarkOut();
-            if (markIn==null){
+            if (markIn.equals("")){
                 estado="out";
             }else {
-                if (markOut==null){
+                if (markOut.equals("")){
                     estado="in";
+                }else {
+                    estado="out";
                 }
             }
 

@@ -32,13 +32,12 @@ public class WSOutsourcerTask extends AsyncTask <String, String, OutsourcerWebCl
 
         String cookie;
         String  user, pass;
+        cookie=params[0];
+        user=params[1];
+        pass=params[2];
 
-        user=params[0];
-        pass=params[1];
-
-        cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
+        //cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
         if (cookie ==null){
-
             return null;
         }
         OutsourcerWebClient outsourcer = wsOutsourcerServices.outByName(cookie, user);

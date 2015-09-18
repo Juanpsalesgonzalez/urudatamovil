@@ -33,6 +33,8 @@ public class OutsourcerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String cookie = intent.getStringExtra("cookie");
+        String user = intent.getStringExtra("user");
+        String pass = intent.getStringExtra("pass");
         new WSOutsourcerTask(this).execute(cookie);
     }
 

@@ -151,6 +151,16 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
             loginIntent.putExtra("user", user);
             loginIntent.putExtra("pass", pass);
             startActivityForResult(loginIntent, Constants.LOGIN_REQUEST, null);
+           /* Intent mainIntent = new Intent(this,MainActivityOutsourcer.class);
+            mainIntent.putExtra("name","Juan Pablo ");
+            mainIntent.putExtra("id","666");
+            mainIntent.putExtra("saldo","3");
+            mainIntent.putExtra("dir","Juan Paullier 1020");
+            mainIntent.putExtra("cel","099090514");
+
+            mainIntent.putExtra("user",getUser());
+            mainIntent.putExtra("pass",getPass());
+            startActivity(mainIntent); */
         }
     }
 

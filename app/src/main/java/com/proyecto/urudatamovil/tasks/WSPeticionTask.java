@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import com.proyecto.urudatamovil.activities.ListPeticionActivity;
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
-import com.proyecto.urudatamovil.services.WSLoginServices;
 import com.proyecto.urudatamovil.services.WSPeticionServices;
 
 import java.util.ArrayList;
@@ -16,12 +15,12 @@ import java.util.ArrayList;
 public class WSPeticionTask extends AsyncTask <String, String, ArrayList<PeticionWebClient>> {
 
     private ListPeticionActivity actividad;
-    private WSLoginServices wsLoginServices ;
+//    private WSLoginServices wsLoginServices ;
     private WSPeticionServices wsPeticionServices;
 
     public WSPeticionTask(ListPeticionActivity a){
         actividad=a;
-        wsLoginServices = new WSLoginServices();
+//        wsLoginServices = new WSLoginServices();
         wsPeticionServices = new WSPeticionServices();
     }
 

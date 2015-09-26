@@ -1,0 +1,24 @@
+if (marcaE.equals("")){
+                estado="out";
+            }else {
+                if (marcaS.equals("")){
+                    estado="in";
+                }else {
+                    estado="out";
+                }
+            }
+
+            final ImageView imageSem = (ImageView) findViewById(R.id.imageView_Semaforo);
+            final Switch switchES = (Switch) findViewById(R.id.switchEntradaSalida);
+
+            switchES.setTextOn("Entrada");
+            switchES.setTextOff("Salida");
+            switchES.setTrackResource(R.drawable.abc_switch_thumb_material);
+
+            if (estado.equals("out")) {
+                imageSem.setImageResource(R.drawable.rojo24);
+                switchES.setChecked(false);
+            }else {
+                imageSem.setImageResource(R.drawable.verde24);
+                switchES.setChecked(true);
+            }

@@ -82,12 +82,20 @@ public class MainActivityOutsourcer extends AppCompatActivity {
                 finish();
             }
             TextView textName= (TextView) findViewById(R.id.textName);
-            textName.setText(getName());
-            String marca=this.getMarkIn();
-            if (marca.equals("")){
-                marca="Entrada";
+            textName.setText(getName() + "\n" + getCel() + "\n" + getDir());
+            String marcaE, marcaS;
+            String estado=null;
+            String marca = null;
+            marcaE=getMarcaE();
+            marcaS=getMarcaS();
+            if (marcaE.equals("")){
+                estado="out";
             }else {
-                marca="Salida";
+                if (marcaS.equals("")){
+                    estado="in";
+                }else {
+                    estado="out";
+                }
             }
 
             final ImageView imageSem = (ImageView) findViewById(R.id.imageView_Semaforo);
@@ -97,18 +105,19 @@ public class MainActivityOutsourcer extends AppCompatActivity {
             switchES.setTextOff("Salida");
             switchES.setTrackResource(R.drawable.abc_switch_thumb_material);
 
-            if (marca.equals("Entrada")) {
+            if (estado.equals("out")) {
                 imageSem.setImageResource(R.drawable.rojo24);
+                switchES.setChecked(false);
             }else {
                 imageSem.setImageResource(R.drawable.verde24);
+                switchES.setChecked(true);
             }
-
             switchES.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView,
                                              boolean isChecked) {
-
+                    marcarES();
                     if (isChecked) {
                         imageSem.setImageResource(R.drawable.rojo24);
                     } else {
@@ -117,13 +126,24 @@ public class MainActivityOutsourcer extends AppCompatActivity {
 
                 }
             });
-
     }
 
+    private void cambiarSwitch(){
+        final Switch switchES = (Switch) findViewById(R.id.switchEntradaSalida);
+        if (switchES.isChecked()){
+            switchES.setChecked(false);
+        }else {
+            switchES.setChecked(true);
+        }
+    }
 
     // Llamado al presionar Marcar
-    public void outMark(View view) {
-
+    public void marcarES() {
+        Intent marcaIntent = new Intent(this, OutsourcerActivity.class);
+        marcaIntent.putExtra("cookie", getCookie());
+        marcaIntent.putExtra("user",getUser());
+        marcaIntent.putExtra("pass",getPass());
+        startActivityForResult(marcaIntent,Constants.ACTION_MARCA,null);
     }
 
     // Llamado al presionar Licencia
@@ -154,11 +174,10 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         if (resultCode == Constants.LOGIN_FAILED) {
             errorMessage("Error");
         } else {
-            int action = this.getIntent().getIntExtra("action", 0);
-            switch (action) {
+            switch (requestCode) {
                 case Constants.ACTION_MARCA:
                     if (resultCode != Constants.RESULT_OK) {
-                        System.out.println("hola");
+                        cambiarSwitch();
                     } else {
                         finish();
                     }
@@ -198,10 +217,16 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         return getIntent().getStringExtra("saldo");
     }
     private String getId(){
-        return getIntent().getStringExtra("Id");
+        return getIntent().getStringExtra("id");
     }
-    private String getMarkIn(){
+    private String getMarcaE(){
         return getIntent().getStringExtra("marcaE");
+    }
+    private String getMarcaS(){
+        return getIntent().getStringExtra("marcaS");
+    }
+    private String getCookie() {
+        return getIntent().getStringExtra("cookie");
     }
     private String getCel(){
         return getIntent().getStringExtra("cel");
@@ -209,10 +234,12 @@ public class MainActivityOutsourcer extends AppCompatActivity {
     private String getDir(){
         return getIntent().getStringExtra("dir");
     }
-    private String getCookie(){
-        return getIntent().getStringExtra("cookie");
+    private String getUser(){
+        return getIntent().getStringExtra("user");
     }
-
+    private String getPass(){
+        return getIntent().getStringExtra("Pass");
+    }
 
 // Fragmento de pantalla
 

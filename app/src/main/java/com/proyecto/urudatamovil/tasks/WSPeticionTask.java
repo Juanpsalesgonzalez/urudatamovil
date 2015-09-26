@@ -34,14 +34,15 @@ public class WSPeticionTask extends AsyncTask <String, String, ArrayList<Peticio
 
         user=params[0];
         pass=params[1];
-        fechaIni=params[2];
-        fechaFin=params[3];
-        estado=params[4];
+        cookie=params[2];
+        fechaIni=params[3];
+        fechaFin=params[4];
+        estado=params[5];
 
-        cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
-        if (cookie ==null){
-            return null;
-        }
+       // cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
+       // if (cookie ==null){
+       //     return null;
+       // }
         listaPet= wsPeticionServices.listaPet(user, cookie, fechaIni, fechaFin, estado);
         return listaPet;
     }

@@ -30,10 +30,11 @@ public class LicenceConnectActivity extends AppCompatActivity {
         String initDate = conIntent.getStringExtra("init");
         String endDate = conIntent.getStringExtra("end");
         String user = conIntent.getStringExtra("name");
+        String cookie = conIntent.getStringExtra("cookie");
         String pass = conIntent.getStringExtra("pass");
         String descripcion = conIntent.getStringExtra("descripcion");
         String cert = conIntent.getStringExtra("cert");
-        new WSLicenceTask(this).execute(user, pass, endDate, initDate, descripcion, cert);
+        new WSLicenceTask(this).execute(user, pass, cookie, endDate, initDate, descripcion, cert);
     }
 
 

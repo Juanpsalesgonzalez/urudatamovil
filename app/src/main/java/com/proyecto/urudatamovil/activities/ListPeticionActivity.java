@@ -38,10 +38,11 @@ public class ListPeticionActivity extends AppCompatActivity {
         String initDate = null;
         String endDate = null;
         String user = conIntent.getStringExtra("user");
+        String cookie = conIntent.getStringExtra("cookie");
         String pass = conIntent.getStringExtra("pass");
         String comment = null;
         String certificado = null;
-        new com.proyecto.urudatamovil.tasks.WSPeticionTask(this).execute(user, pass, endDate, initDate, comment, certificado);
+        new com.proyecto.urudatamovil.tasks.WSPeticionTask(this).execute(user, pass, cookie, endDate, initDate, comment, certificado);
 
     }
 

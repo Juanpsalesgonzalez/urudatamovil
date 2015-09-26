@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import com.proyecto.urudatamovil.activities.LicenceConnectActivity;
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.services.WSCertificadoServices;
-import com.proyecto.urudatamovil.services.WSLoginServices;
 import com.proyecto.urudatamovil.services.WSPeticionServices;
 
 /**
@@ -15,13 +14,13 @@ import com.proyecto.urudatamovil.services.WSPeticionServices;
 public class WSLicenceTask extends AsyncTask <String, String, PeticionWebClient>  {
 
     private LicenceConnectActivity actividad;
-    private WSLoginServices wsLoginServices;
+    //private WSLoginServices wsLoginServices;
     private WSPeticionServices wsPeticionServices;
     private WSCertificadoServices wsCertificadoServices;
 
     public WSLicenceTask(Activity a){
         actividad = (LicenceConnectActivity) a;
-        wsLoginServices = new WSLoginServices();
+//        wsLoginServices = new WSLoginServices();
         wsPeticionServices = new WSPeticionServices();
         wsCertificadoServices = new WSCertificadoServices();
     }
@@ -35,15 +34,16 @@ public class WSLicenceTask extends AsyncTask <String, String, PeticionWebClient>
 
         user = params[0];
         pass = params[1];
-        endDate = params[2];
-        initDate = params[3];
-        comment = params[4];
-        cert= params[5];
+        cookie = params[2];
+        endDate = params[3];
+        initDate = params[4];
+        comment = params[5];
+        cert= params[6];
 
-        cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
-        if (cookie ==null){
-            return null;
-        }
+       // cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
+       // if (cookie ==null){
+       // (())     return null;
+       // }
 
         PeticionWebClient peticion = wsPeticionServices.setLicense(user, cookie, initDate, endDate, comment);
         if (peticion ==null){

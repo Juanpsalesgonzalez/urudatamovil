@@ -78,6 +78,7 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
             super.onResume();
             if (isQuit) {
                 olvidarPass();
+                isQuit=false;
                 finish();
             }
             String modo = recuperarModo();
@@ -167,6 +168,10 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
                 mainIntent.putExtra("name",resultIntent.getStringExtra("name"));
                 mainIntent.putExtra("id",resultIntent.getStringExtra("id"));
                 mainIntent.putExtra("saldo",resultIntent.getStringExtra("saldo"));
+                mainIntent.putExtra("marcaE",resultIntent.getStringExtra("marcaE"));
+                mainIntent.putExtra("marcaS",resultIntent.getStringExtra("marcaS"));
+                mainIntent.putExtra("dir",resultIntent.getStringExtra("dir"));
+                mainIntent.putExtra("cel",resultIntent.getStringExtra("cel"));
                 mainIntent.putExtra("user",getUser());
                 mainIntent.putExtra("pass",getPass());
                 startActivity(mainIntent);

@@ -20,6 +20,9 @@ import com.proyecto.urudatamovil.utils.Constants;
 import com.proyecto.urudatamovil.utils.DateUtils;
 import com.proyecto.urudatamovil.utils.FechaDialogFragment;
 
+import java.util.Iterator;
+import java.util.Set;
+
 
 public class LicenceActivity extends AppCompatActivity {
 
@@ -33,6 +36,8 @@ public class LicenceActivity extends AppCompatActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        Intent i = getIntent();
+        i.putExtra("descripcion","Licencia por Enfermedad"); // Valor por defecto
     }
 
     @Override
@@ -168,27 +173,31 @@ public class LicenceActivity extends AppCompatActivity {
         startActivityForResult(conIntent, Constants.CONFIRM_LICENCE_CODE);
     }
 
-    private Intent loadIntent(Intent intent){
+    private Intent loadIntent(Intent newIntent){
 
             TextView endDateTV, initDateTV;
             String initDate, endDate, descripcion;
 
             Intent currIntent = getIntent();
-            descripcion = currIntent.getStringExtra("descripcion");
-            if (descripcion == null){
-                descripcion="Licencia por Enfermedad";
-            }
-            String user = currIntent.getStringExtra("user");
-            String pass = currIntent.getStringExtra("pass");
-            String cert = currIntent.getStringExtra("cert");
 
-            intent.putExtra("init",getDisplayFechaIni());
-            intent.putExtra("end",getDisplayFechaFin());
-            intent.putExtra("name", user);
-            intent.putExtra("pass",pass);
-            intent.putExtra("descripcion",descripcion);
-            intent.putExtra("cert",cert);
-            return intent;
+            newIntent.putExtra("init",getDisplayFechaIni());
+            newIntent.putExtra("end", getDisplayFechaFin());
+            Bundle extras = currIntent.getExtras();
+            if (extras != null) {
+                Set<String> keys = extras.keySet();
+                Iterator<String> it = keys.iterator();
+                //Log.e(LOG_TAG, "Dumping Intent start");
+                while (it.hasNext()) {
+                    String key = it.next();
+                    newIntent.putExtra(key,currIntent.getStringExtra(key));
+                }
+            }
+            //intent.putExtra("name", currIntent.getStringExtra("user"));
+            //intent.putExtra("pass", currIntent.getStringExtra("pass"));
+            //intent.putExtra("descripcion", descripcion);
+            //intent.putExtra("cert", currIntent.getStringExtra("cert"));
+            //intent.putExtra("saldo")
+            return newIntent;
         }
 
 

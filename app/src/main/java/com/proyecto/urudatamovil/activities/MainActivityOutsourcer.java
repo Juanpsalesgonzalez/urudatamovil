@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.proyecto.urudatamovil.R;
 import com.proyecto.urudatamovil.utils.Constants;
+import com.proyecto.urudatamovil.utils.IntentsUtils;
 
 
 public class MainActivityOutsourcer extends AppCompatActivity {
@@ -82,7 +83,12 @@ public class MainActivityOutsourcer extends AppCompatActivity {
             }
             TextView textName= (TextView) findViewById(R.id.textName);
             textName.setText(getName());
-            String marca="Entrada";
+            String marca=this.getMarkIn();
+            if (marca.equals("")){
+                marca="Entrada";
+            }else {
+                marca="Salida";
+            }
 
             final ImageView imageSem = (ImageView) findViewById(R.id.imageView_Semaforo);
             final Switch switchES = (Switch) findViewById(R.id.switchEntradaSalida);
@@ -121,12 +127,23 @@ public class MainActivityOutsourcer extends AppCompatActivity {
     }
 
     // Llamado al presionar Licencia
-    public void licencia(View view) {
+    public void solicitarLicencia(View view) {
+        Intent licIntent = new Intent(this,LicenceActivity.class);
+        Intent currIntent=getIntent();
+        IntentsUtils.copyExtras(currIntent,licIntent);
+        startActivityForResult(licIntent,Constants.ACTION_LICENCIA,null);
+
+
 
     }
 
     // Llamado al presionar Peticiones,
     public void verPeticiones(View view) {
+        Intent petIntent = new Intent(this,ListPeticionActivity.class);
+        Intent currIntent=getIntent();
+        IntentsUtils.copyExtras(currIntent,petIntent);
+        startActivityForResult(petIntent,Constants.ACTION_PETICION);
+
 
     }
 
@@ -184,7 +201,16 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         return getIntent().getStringExtra("Id");
     }
     private String getMarkIn(){
-        return getIntent().getStringExtra("MarkIn");
+        return getIntent().getStringExtra("marcaE");
+    }
+    private String getCel(){
+        return getIntent().getStringExtra("cel");
+    }
+    private String getDir(){
+        return getIntent().getStringExtra("dir");
+    }
+    private String getCookie(){
+        return getIntent().getStringExtra("cookie");
     }
 
 

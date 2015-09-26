@@ -24,8 +24,9 @@ public class CertificadoConnectActivity extends AppCompatActivity {
         String petId=pet.getIdPeticion().toString();
         String cert=pet.getCertificado();
         String user=currentIntent.getStringExtra("user");
+        String cookie=currentIntent.getStringExtra("cookie");
         String pass=currentIntent.getStringExtra("pass");
-        new WSCertificadoTask(this).execute(user, pass, petId, cert);
+        new WSCertificadoTask(this).execute(user, pass, cookie, petId, cert);
 
     }
     @Override

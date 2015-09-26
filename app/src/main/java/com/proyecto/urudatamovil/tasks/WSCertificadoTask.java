@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import com.proyecto.urudatamovil.activities.CertificadoConnectActivity;
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.services.WSCertificadoServices;
-import com.proyecto.urudatamovil.services.WSLoginServices;
 
 /**
  * Created by juan on 26/04/15.
@@ -14,7 +13,7 @@ import com.proyecto.urudatamovil.services.WSLoginServices;
 public class WSCertificadoTask extends AsyncTask <String, String, PeticionWebClient> {
 
     private CertificadoConnectActivity actividad;
-    private WSLoginServices wsLoginServices=new WSLoginServices();
+//    private WSLoginServices wsLoginServices=new WSLoginServices();
     private WSCertificadoServices wsCertificadoServices= new WSCertificadoServices();
 
     public WSCertificadoTask(CertificadoConnectActivity a) {
@@ -29,13 +28,14 @@ public class WSCertificadoTask extends AsyncTask <String, String, PeticionWebCli
 
         user=params[0];
         pass=params[1];
-        petId=params[2];
-        cert=params[3];
+        cookie=params[2];
+        petId=params[3];
+        cert=params[4];
 
-        cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
-        if (cookie ==null){
-            return null;
-        }
+       // cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
+       //  if (cookie ==null){
+        //     return null;
+       //  }
 
        PeticionWebClient peticion = wsCertificadoServices.setCertificate(cookie, petId, cert);
         if (peticion ==null){

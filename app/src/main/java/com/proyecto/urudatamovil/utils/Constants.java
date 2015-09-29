@@ -7,9 +7,10 @@ package com.proyecto.urudatamovil.utils;
 public class Constants {
 
   //  private static final String ip_ctr="http://ctr.urudata.com/urudataTEST";
-    private static final String ip_ctr="200.71.4.212/urudataTEST";
-  //  private static final String ip_ctr="192.168.1.17:8080/urudata";
+  //  private static final String ip_ctr="200.71.4.212/urudataTEST";
+    private static final String ip_ctr="192.168.8.100:8080/urudata";
     public static final String URL_CONFIRM="http://" + ip_ctr + "/rest/confirm";
+    public static final String URL_OUTBYUSER="http://" + ip_ctr + "/rest/outById";
     public static final String URL_SET_LICENSE="http://" + ip_ctr + "/rest/setLicence";
     public static final String URL_LOGIN_PROCESS="http://" + ip_ctr + "/loginProcess";
     public static final String URL_UPLOAD_CERT="http://" + ip_ctr + "/rest/uploadCert";

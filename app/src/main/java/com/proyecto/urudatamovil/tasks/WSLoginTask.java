@@ -7,6 +7,7 @@ import com.proyecto.urudatamovil.activities.LoginConnectActivity;
 import com.proyecto.urudatamovil.objects.OutsourcerWebClient;
 import com.proyecto.urudatamovil.services.WSLoginServices;
 import com.proyecto.urudatamovil.services.WSOutsourcerServices;
+import com.proyecto.urudatamovil.utils.IntentsUtils;
 
 /**
  * Created by juan on 14/08/15.
@@ -31,27 +32,18 @@ public class WSLoginTask extends AsyncTask<String,String,Intent> {
         user = params[0];
         pass = params[1];
 
-
         cookie = wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
         if (cookie == null) {
             return null;
         }
-        OutsourcerWebClient outsourcer = wsOutsourcerServices.outByName(cookie, user);
+        OutsourcerWebClient outsourcer = wsOutsourcerServices.outByUser(cookie, user);
         if (outsourcer ==null){
             return null;
         }
-
-        Intent result = new Intent();
+        Intent result = IntentsUtils.outsourcerToIntent(outsourcer);
         result.putExtra("cookie",cookie);
         result.putExtra("user",user);
         result.putExtra("pass",pass);
-        result.putExtra("name",outsourcer.getNombre());
-        result.putExtra("id",outsourcer.getId());
-        result.putExtra("saldo","10");
-        result.putExtra("marcaE",outsourcer.getMarkIn());
-        result.putExtra("marcaS",outsourcer.getMarkOut());
-        result.putExtra("dir",outsourcer.getDireccion());
-        result.putExtra("cel", outsourcer.getCel());
         return result;
     }
 

@@ -151,16 +151,6 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
             loginIntent.putExtra("user", user);
             loginIntent.putExtra("pass", pass);
             startActivityForResult(loginIntent, Constants.LOGIN_REQUEST, null);
-           /* Intent mainIntent = new Intent(this,MainActivityOutsourcer.class);
-            mainIntent.putExtra("name","Juan Pablo ");
-            mainIntent.putExtra("id","666");
-            mainIntent.putExtra("saldo","3");
-            mainIntent.putExtra("dir","Juan Paullier 1020");
-            mainIntent.putExtra("cel","099090514");
-
-            mainIntent.putExtra("user",getUser());
-            mainIntent.putExtra("pass",getPass());
-            startActivity(mainIntent); */
         }
     }
 
@@ -177,6 +167,7 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
                 mainIntent.putExtra("cookie",resultIntent.getStringExtra("cookie"));
                 mainIntent.putExtra("name",resultIntent.getStringExtra("name"));
                 mainIntent.putExtra("id",resultIntent.getStringExtra("id"));
+                mainIntent.putExtra("cliente",resultIntent.getStringExtra("cliente"));
                 mainIntent.putExtra("saldo",resultIntent.getStringExtra("saldo"));
                 mainIntent.putExtra("marcaE",resultIntent.getStringExtra("marcaE"));
                 mainIntent.putExtra("marcaS",resultIntent.getStringExtra("marcaS"));

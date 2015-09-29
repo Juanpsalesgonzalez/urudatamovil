@@ -8,66 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.proyect.urudatamovil.OutNameActivity$PlaceholderFragment" >
 
-    <EditText
-        android:id="@+id/name_value"
-        android:hint="@string/Hint_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_alignTop="@+id/name_label_text"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="60dp"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:id="@+id/name_label_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/outName_name_label"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@+id/id_label_text"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="60dp" />
-
-    <TextView
-        android:id="@+id/id_label_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/outName_id_label"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/id_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/label_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_below="@+id/name_value"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_toRightOf="@+id/id_label_text"
-        android:layout_toEndOf="@+id/id_label_text" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
-        android:onClick="botonSalir"
-        android:text="@string/button_close"
-        android:id="@+id/button_close"
-        android:layout_below="@+id/label_status"
-        android:layout_centerHorizontal="true"
-        />
 
 </RelativeLayout>
 

@@ -1,9 +1,9 @@
 package com.proyecto.urudatamovil.activities;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -71,10 +71,13 @@ public class ListPeticionActivity extends AppCompatActivity {
             return true;
         }
 
-        if (item.getItemId() == R.id.menu_main_action_close) {
+        if (id == R.id.menu_main_action_close) {
             finish();
         }
-
+        if(id == android.R.id.home){
+            setResult(Constants.LOGIN_FAILED, null);
+            finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 

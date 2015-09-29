@@ -33,9 +33,8 @@
             android:theme="@style/Theme.AppCompat" >
         </activity>
         <activity
-            android:name=".activities.OutsourcerActivity"
+            android:name=".activities.ConfirmActivity"
             android:label="@string/title_activity_out_name"
-            android:parentActivityName=".activities.MainActivityOutsourcer"
             android:theme="@style/Theme.AppCompat" >
         </activity>
         <activity

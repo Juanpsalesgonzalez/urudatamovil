@@ -109,7 +109,7 @@ public class WSPeticionServices {
 
         if (response == null) {
             System.out.println("Response NULL");
-            //return null;
+            return null;
         }
 
         return  responseToArray(response);

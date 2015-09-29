@@ -51,7 +51,7 @@ public class WSLicenceTask extends AsyncTask <String, String, PeticionWebClient>
         }
         petIdL = peticion.getIdPeticion();
         petId=petIdL.toString();
-        if (cert!=null){
+        if (!cert.equals("")){
             wsCertificadoServices.setCertificate(cookie,petId,cert);
         }
 

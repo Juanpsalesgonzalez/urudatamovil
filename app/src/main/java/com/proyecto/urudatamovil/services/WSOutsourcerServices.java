@@ -17,11 +17,26 @@ import org.springframework.web.client.RestTemplate;
  */
 public class WSOutsourcerServices {
 
-    public OutsourcerWebClient outByName(String cookie, String user) {
+    public OutsourcerWebClient confirma(String cookie, String user){
+        String url=Constants.URL_CONFIRM;
+        OutsourcerWebClient o =  getOutsourcer(cookie, user,url);
+        if (o==null){
+            return null;
+        }
+        return o;
+    }
 
-        String url;
+    public OutsourcerWebClient outByUser(String cookie, String user){
+        String url=Constants.URL_OUTBYUSER;
+        OutsourcerWebClient o =  getOutsourcer(cookie, user,url);
+        if (o==null){
+            return null;
+        }
+        return o;
+    }
 
-        url = Constants.URL_CONFIRM;
+    public OutsourcerWebClient getOutsourcer(String cookie, String user, String url) {
+
         url = url + "?username=" + user;
         RestTemplate rT = new RestTemplate(true);
         HttpHeaders headers = new HttpHeaders();
@@ -37,36 +52,52 @@ public class WSOutsourcerServices {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         if (response == null) {
             return null;
         }
-        String body = response.getBody();
-        String nombre = null;
-        String id = null;
-        String markIn = null;
-        String markOut = null;
-        String cel = null;
-        String dir=null;
-        try {
-            JSONObject j = new JSONObject(body);
-            nombre = j.get("nombre").toString();
-            id = j.get("id").toString();
-            markIn = j.get("markIn").toString();
-            markOut = j.get("markOut").toString();
-            dir=j.get("direccion").toString();
-            cel=j.get("celular").toString();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        OutsourcerWebClient out = new OutsourcerWebClient(nombre, id);
-        out.setMarkIn(markIn);
-        out.setMarkOut(markOut);
-        out.setCel(cel);
-        out.setDireccion(dir);
-        return out;
-
+        return responseToOut(response);
     }
+/* Convierte un httpresponse en un outsourcer */
+
+     public OutsourcerWebClient responseToOut(ResponseEntity<String> response ){
+
+         if (response == null) {
+             return null;
+         }
+         String body = response.getBody();
+         String nombre  = null;
+         String id      = null;
+         String markIn  = null;
+         String markOut = null;
+         String cel     = null;
+         String dir     = null;
+         String saldo   = null;
+         String cliente = null;
+         try {
+             JSONObject outJSON = new JSONObject(body);
+
+             nombre  =  outJSON.get("nombre").toString();
+             id      =  outJSON.get("id").toString();
+             markIn  =  outJSON.get("markIn").toString();
+             markOut =  outJSON.get("markOut").toString();
+             dir     =  outJSON.get("direccion").toString();
+             cel     =  outJSON.get("celular").toString();
+             saldo   =  outJSON.get("saldo").toString();
+             cliente =  outJSON.get("cliente").toString();
+             //saldo = "10";
+             //cliente = "consejo de formacion en educacion";
+         } catch (Exception e) {
+             e.printStackTrace();
+             return null;
+         }
+
+         OutsourcerWebClient out = new OutsourcerWebClient(nombre, id);
+         out.setMarkIn(markIn);
+         out.setMarkOut(markOut);
+         out.setCel(cel);
+         out.setDireccion(dir);
+         out.setSaldo(saldo);
+         out.setCliente(cliente);
+         return out;
+     }
 }

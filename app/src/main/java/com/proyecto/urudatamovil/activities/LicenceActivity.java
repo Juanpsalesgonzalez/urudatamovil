@@ -37,7 +37,7 @@ public class LicenceActivity extends AppCompatActivity {
                     .commit();
         }
         Intent i = getIntent();
-        i.putExtra("descripcion","Licencia por Enfermedad"); // Valor por defecto
+        i.putExtra("descripcion","Licencia Reglamentaria"); // Default value
     }
 
     @Override
@@ -58,13 +58,11 @@ public class LicenceActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         if (item.getItemId() == R.id.menu_licencia_action_close) {
             System.out.println("Cerrando  el MAIN....");
             finish();
         }
         return super.onOptionsItemSelected(item);
-
     }
 
     // No son seters o getters, son para poner y leer de la Vista.
@@ -115,7 +113,7 @@ public class LicenceActivity extends AppCompatActivity {
 
     public void checkRadioButton(){
         RadioGroup r= (RadioGroup)findViewById(R.id.radioGroup);
-        r.check(R.id.radio_lic_enfermedad);
+        r.check(R.id.radio_lic_comun);
     }
 
     public void onRadioButtonClicked(View view) {

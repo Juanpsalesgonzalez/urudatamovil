@@ -50,24 +50,16 @@ public class LicenceConnectActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void confirmTaskFinished(PeticionWebClient p) {
-
-
         if (p != null) {
-
                Intent petDetail = new Intent(this,PeticionDetailActivity.class);
                petDetail.putExtra("peticion",p);
                startActivity(petDetail);
@@ -78,8 +70,8 @@ public class LicenceConnectActivity extends AppCompatActivity {
 
     public void onOkButtonClicked(View v){
         finish();
-
     }
+
     /**
      * A placeholder fragment containing a simple view.
      */

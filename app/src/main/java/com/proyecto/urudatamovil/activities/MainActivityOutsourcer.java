@@ -92,7 +92,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
 
     }
 
-
     public static void setQuit(boolean flag) {
         isQuit = flag;
     }
@@ -149,7 +148,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
                 } else {
                     imageSem.setImageResource(R.drawable.rojo24);
                 }*/
-
             }
         });
 
@@ -160,7 +158,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         marcaIntent.putExtra("user",getUser());
         startActivityForResult(marcaIntent,Constants.ACTION_MARCA,null);
     }
-
 
     // Llamado al presionar Licencia
     public void solicitarLicencia(View view) {
@@ -176,10 +173,7 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         Intent currIntent = getIntent();
         IntentsUtils.copyExtras(currIntent, petIntent);
         startActivityForResult(petIntent, Constants.ACTION_PETICION);
-
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

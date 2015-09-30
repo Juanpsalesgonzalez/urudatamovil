@@ -83,8 +83,7 @@ public class LicenceConnectActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_licence_connect, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_licence_connect, container, false);
         }
     }
 }

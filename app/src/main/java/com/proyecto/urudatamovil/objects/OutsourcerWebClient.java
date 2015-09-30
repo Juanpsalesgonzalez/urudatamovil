@@ -111,6 +111,7 @@ public class OutsourcerWebClient implements Parcelable {
         }
     };
 
+    @SuppressWarnings("WeakerAccess")
     public OutsourcerWebClient (Parcel in) {
         id= in.readString();
         nombre= in.readString();

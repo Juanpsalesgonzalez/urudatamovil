@@ -19,13 +19,12 @@ import java.util.List;
  */
 public class PeticionAdapter extends ArrayAdapter<PeticionWebClient> {
 
-    private ArrayList<PeticionWebClient> peticionesAL;
     private final Context context;
 
     public PeticionAdapter(Context c, List<PeticionWebClient> model ){
         super(c, R.layout.item_lista_pet, model);
         this.context = c;
-        this.peticionesAL = (ArrayList) model;
+        ArrayList<PeticionWebClient> peticionesAL = (ArrayList) model;
     }
 
     @Override

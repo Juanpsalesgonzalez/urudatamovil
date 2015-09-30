@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.proyecto.urudatamovil.objects.OutsourcerWebClient;
 
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -17,11 +16,8 @@ public class IntentsUtils {
         Bundle extras = oldI.getExtras();
         if (extras != null) {
             Set<String> keys = extras.keySet();
-            Iterator<String> it = keys.iterator();
-            //Log.e(LOG_TAG, "Dumping Intent start");
-            while (it.hasNext()) {
-                String key = it.next();
-                newI.putExtra(key,oldI.getStringExtra(key));
+            for (String key : keys) {
+                newI.putExtra(key, oldI.getStringExtra(key));
             }
             newI.putExtra("copiado","Copiado");
             return newI;
@@ -34,10 +30,8 @@ public class IntentsUtils {
         Bundle extras = intent.getExtras();
         if (extras != null) {
             Set<String> valores = extras.keySet();
-            Iterator<String> it = valores.iterator();
-            while (it.hasNext()) {
-                String valor = it.next();
-                if (valor == null) {
+            for (String valor : valores) {
+                if (intent.getStringExtra(valor) == null) {
                     intent.putExtra(valor, "");
                 }
             }
@@ -74,6 +68,7 @@ public class IntentsUtils {
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public static Intent emptyIntent(){
         Intent result= new Intent();
         result.putExtra("name","Don Nadie");

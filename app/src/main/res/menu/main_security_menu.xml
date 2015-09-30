@@ -4,11 +4,11 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/security_menu_olvidar"
             android:checked="true"
-            android:title="Olvidar usuario/password"/>
+            android:title="@string/main_security_menu_olvidarTodo"/>
         <item android:id="@+id/security_menu_recordar_usuario"
-            android:title="Recordar usuario" />
+            android:title="@string/main_security_menu_recordarUsuario" />
         <item android:id="@+id/security_recordar_todo"
-            android:title="Recordar usuario y password">
+            android:title="@string/main_security_menu_recordarTodo">
         </item>
     </group>
 </menu>

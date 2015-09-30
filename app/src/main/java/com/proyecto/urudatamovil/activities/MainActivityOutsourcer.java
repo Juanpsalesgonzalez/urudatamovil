@@ -1,10 +1,9 @@
 package com.proyecto.urudatamovil.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import com.proyecto.urudatamovil.R;
 import com.proyecto.urudatamovil.utils.Constants;
 import com.proyecto.urudatamovil.utils.IntentsUtils;
+import com.proyecto.urudatamovil.utils.PopupUtilities;
 
 
 public class MainActivityOutsourcer extends AppCompatActivity {
@@ -86,12 +86,13 @@ public class MainActivityOutsourcer extends AppCompatActivity {
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState){
+    public void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
         Intent currIntent=getIntent();
         currIntent.putExtras(savedInstanceState);
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public static void setQuit(boolean flag) {
         isQuit = flag;
     }
@@ -108,7 +109,7 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         TextView textName = (TextView) findViewById(R.id.textName);
         textName.setText(getName() + "\n" + getCliente() + "\n" + getSaldo());
         String marcaE, marcaS;
-        String estado = null;
+        String estado;
         marcaE = getMarcaE();
         marcaS = getMarcaS();
         if (marcaE.equals("")) {
@@ -152,10 +153,11 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         });
 
     }
+    @SuppressWarnings("WeakerAccess")
     public void marcarES() {
         Intent marcaIntent = new Intent(this, ConfirmActivity.class);
         marcaIntent.putExtra("cookie", getCookie());
-        marcaIntent.putExtra("user",getUser());
+        marcaIntent.putExtra("user", getUser());
         startActivityForResult(marcaIntent,Constants.ACTION_MARCA,null);
     }
 
@@ -179,9 +181,8 @@ public class MainActivityOutsourcer extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Constants.LOGIN_FAILED) {
-            errorMessage("Error");
+            PopupUtilities.errorMessage("Error", this);
         } else {
-            int action = this.getIntent().getIntExtra("action", 0);
             switch (requestCode) {
                 case Constants.ACTION_MARCA:
                     if (resultCode != Constants.RESULT_OK) {
@@ -189,14 +190,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
                     } else {
                         if (data!=null){
                             IntentsUtils.copyExtras(data,this.getIntent());
-                            String s =this.getIntent().getStringExtra("copiado");
-                            if (s==null){
-                                s="No Copiado";
-                            }
-                            s =this.getIntent().getStringExtra("marcaS");
-                            if (s==null){
-                                s="";
-                            }
                         }
                     }
                     break;
@@ -208,25 +201,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
             }
 
         }
-    }
-
-    public void errorMessage(String m) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle(m);
-        alertDialogBuilder
-                .setMessage("")
-                .setCancelable(false)
-                .setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        MainActivityOutsourcer.this.finish();
-                    }
-                })
-                .setNegativeButton("Reintentar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        alertDialogBuilder.show();
     }
 
     private String getName() {
@@ -278,8 +252,7 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_main, container, false);
 
         }
     }

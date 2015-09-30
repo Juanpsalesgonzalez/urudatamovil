@@ -69,17 +69,18 @@ public class CalendarActivity extends AppCompatActivity {
 
    // Devuelve la lista de los calendarios disponbles en el movil.
 
+    @SuppressWarnings("WeakerAccess")
     public ArrayList<calItem> listCalendars(){
 
         ArrayList<calItem> listCal = new ArrayList<>();
-        Cursor cur = null;
+        Cursor cur;
         ContentResolver cr = getContentResolver();
         Uri uri = CalendarContract.Calendars.CONTENT_URI;
-        long calIdL = 0;
+        long calIdL;
         int calId;
-        String calDisplayName = null;
-        String calAccountName = null;
-        String calOwnerName = null;
+        String calDisplayName;
+        String calAccountName;
+        String calOwnerName;
 
         cur = cr.query(uri, EVENT_PROJECTION, null, null, null);
         while (cur.moveToNext()) {
@@ -92,14 +93,15 @@ public class CalendarActivity extends AppCompatActivity {
             calItem c = new calItem(calId,calDisplayName,calAccountName,calOwnerName);
             listCal.add(calId,c);
         }
+        cur.close();
         return listCal;
     }
 
     private class calItem{
-        int calId;
-        String calDisplayName;
-        String calAccountName;
-        String calOwnerName;
+        final int calId;
+        final String calDisplayName;
+        final String calAccountName;
+        final String calOwnerName;
 
         public calItem(int id, String dName, String accName,String ownName) {
 

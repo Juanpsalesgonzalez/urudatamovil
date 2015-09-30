@@ -36,14 +36,13 @@ public class WSCertificadoServices {
 
    public PeticionWebClient setCertificate(String cookie, String petId, String cert) {
        setCert(cookie,petId,cert);
-       PeticionWebClient p = new PeticionWebClient(petId);
-       return p;
+       return new PeticionWebClient(petId);
    }
 
     public String setCert(String cookie, String petId, String cert) {
 
        // Convertir a png comprimido.
-       Bitmap bitmap=null;
+       Bitmap bitmap;
        File f= new File(cert);
        ByteArrayOutputStream bos = new ByteArrayOutputStream();
        BitmapFactory.Options options = new BitmapFactory.Options();
@@ -87,7 +86,6 @@ public class WSCertificadoServices {
            reqEntity.writeTo(conn.getOutputStream());
            os.close();
            conn.connect();
-            String s = conn.getResponseMessage().toString();
            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                return readStream(conn.getInputStream());
            }
@@ -104,7 +102,7 @@ public class WSCertificadoServices {
         StringBuilder builder = new StringBuilder();
         try {
             reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null) {
                 builder.append(line);
             }

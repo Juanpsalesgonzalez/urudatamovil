@@ -23,10 +23,10 @@ import me.iwf.photopicker.R;
  */
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder> {
 
-    private ArrayList<String> photoPaths = new ArrayList<String>();
-    private LayoutInflater inflater;
+    private ArrayList<String> photoPaths = new ArrayList<>();
+    private final LayoutInflater inflater;
 
-    private Context mContext;
+    private final Context mContext;
 
 
     public PhotoAdapter(Context mContext, ArrayList<String> photoPaths) {
@@ -77,8 +77,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
 
 
     public static class PhotoViewHolder extends RecyclerView.ViewHolder {
-        private ImageView ivPhoto;
-        private View vSelected;
+        private final ImageView ivPhoto;
+        private final View vSelected;
         public PhotoViewHolder(View itemView) {
             super(itemView);
             ivPhoto   = (ImageView) itemView.findViewById(R.id.iv_photo);

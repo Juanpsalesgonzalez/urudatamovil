@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 public class WSPeticionTask extends AsyncTask <String, String, ArrayList<PeticionWebClient>> {
 
-    private ListPeticionActivity actividad;
+    private final ListPeticionActivity actividad;
 //    private WSLoginServices wsLoginServices ;
-    private WSPeticionServices wsPeticionServices;
+    private final WSPeticionServices wsPeticionServices;
 
     public WSPeticionTask(ListPeticionActivity a){
         actividad=a;

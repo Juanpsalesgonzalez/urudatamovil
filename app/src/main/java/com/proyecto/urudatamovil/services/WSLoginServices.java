@@ -24,7 +24,7 @@ public class WSLoginServices {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-type", "application/x-www-form-urlencoded");
-        LinkedMultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+        LinkedMultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("username", user);
         body.add("password", pass);
 

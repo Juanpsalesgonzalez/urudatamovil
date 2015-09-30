@@ -18,7 +18,7 @@ import java.util.HashMap;
  */
 public class AndrCalendarService {
 
-    private ContentResolver contentResolver;
+    private final ContentResolver contentResolver;
 
     private static final int PROJECTION_ID_INDEX = 0;
     private static final int PROJECTION_ACCOUNT_NAME_INDEX = 1;
@@ -38,14 +38,14 @@ public class AndrCalendarService {
 
     public HashMap<String, String> listCalendars() {
 
-        HashMap<String, String> listCal = new HashMap<String, String>();
-        Cursor cur = null;
+        HashMap<String, String> listCal = new HashMap<>();
+        Cursor cur;
         Uri uri = CalendarContract.Calendars.CONTENT_URI;
-        long calIdL = 0;
+        long calIdL;
         String calId;
-        String calDisplayName = null;
-        String calAccountName = null;
-        String calOwnerName = null;
+        String calDisplayName;
+        String calAccountName;
+        String calOwnerName;
 
         cur = contentResolver.query(uri, EVENT_PROJECTION, null, null, null);
         while (cur.moveToNext()) {
@@ -58,6 +58,7 @@ public class AndrCalendarService {
             String c = calDisplayName + " - " + calAccountName + " - " + calOwnerName;
             listCal.put(calId, c);
         }
+        cur.close();
         return listCal;
     }
 

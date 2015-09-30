@@ -2,8 +2,8 @@ package com.proyecto.urudatamovil.services;
 
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.utils.Constants;
+import com.proyecto.urudatamovil.utils.HttpResponseUtils;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.ContentCodingType;
 import org.springframework.http.HttpEntity;
@@ -14,7 +14,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Created by juan on 01/08/15.
@@ -112,52 +111,10 @@ public class WSPeticionServices {
             return null;
         }
 
-        return  responseToArray(response);
+        return HttpResponseUtils.responseToArray(response);
     }
 
-    public ArrayList<PeticionWebClient> responseToArray(ResponseEntity<ArrayList> response) {
-
-        ArrayList peticionesBody = response.getBody();
-        JSONArray petJSONArray = new JSONArray(peticionesBody);
-        ArrayList<PeticionWebClient> peticiones = new ArrayList<>();
 
 
-        for (int i = 0; i < petJSONArray.length(); i++) {
-            try {
-                @SuppressWarnings("unchecked")
-                Map<String, Object> petHashMap = (Map<String, Object>) petJSONArray.get(i);
-                PeticionWebClient p = hashMapToPeticion(petHashMap);
-                peticiones.add(i,p);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-        return peticiones;
-    }
 
-    public PeticionWebClient hashMapToPeticion(Map<String, Object> petHashMap){
-
-        Long idLong,idOutsourcerLong;
-        Integer id, idOutsourcer;
-        String ids, descripcion, inicia, fin, status, comentarios, notas;
-        System.out.println("hola");
-
-        Object o = petHashMap.get("id");
-        Class c=o.getClass();
-
-        System.out.println("hola");
-        id = (Integer) petHashMap.get("id");
-        idLong = id.longValue();
-        idOutsourcer= (Integer) petHashMap.get("idOutsourcer");
-        idOutsourcerLong=idOutsourcer.longValue();
-        descripcion= (String) petHashMap.get("descripcion");
-        inicia= (String) petHashMap.get("inicia");
-        fin= (String) petHashMap.get("fin");
-        status= (String) petHashMap.get("status");
-
-        PeticionWebClient pet = new PeticionWebClient(idLong,inicia,fin, idOutsourcerLong,descripcion);
-        pet.setEstado(status);
-        return pet;
-    }
 }

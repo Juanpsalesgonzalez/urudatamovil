@@ -59,7 +59,7 @@ public class PeticionWebClient implements Parcelable{
         return fechaSolicitud;
     }
 
-    public void setFechaSolicitud(String fechaSolicitud) {
+    private void setFechaSolicitud(String fechaSolicitud) {
         this.fechaSolicitud = fechaSolicitud;
     }
 
@@ -83,14 +83,14 @@ public class PeticionWebClient implements Parcelable{
         return archivoCertificado;
     }
 
-    public void setArchivoCertificado(String archivoCertificado) {
+    private void setArchivoCertificado(String archivoCertificado) {
         this.archivoCertificado = archivoCertificado;
     }
     public Long getOutsourcer() {
         return outsourcer;
     }
 
-    public void setOutsourcer(Long outsourcer) {
+    private void setOutsourcer(Long outsourcer) {
         this.outsourcer = outsourcer;
     }
 
@@ -140,6 +140,7 @@ public class PeticionWebClient implements Parcelable{
         }
     };
 
+     @SuppressWarnings("WeakerAccess")
      public PeticionWebClient(Parcel in) {
             idPeticion=in.readLong();
             outsourcer=in.readLong();

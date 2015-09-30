@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.proyecto.urudatamovil.R;
 import com.proyecto.urudatamovil.utils.Constants;
+import com.proyecto.urudatamovil.utils.IntentsUtils;
+import com.proyecto.urudatamovil.utils.PopupUtilities;
 
 
 public class LoginOutsourcerActivity extends AppCompatActivity {
@@ -102,7 +104,7 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
     }
 
     public void showPopup(MenuItem item){
-            View v = (View) findViewById(R.id.menu_main_opciones);
+            View v = findViewById(R.id.menu_main_opciones);
             PopupMenu popupSecurityMenu = new PopupMenu(this,v);
             popupSecurityMenu.getMenuInflater().inflate(R.menu.main_security_menu, popupSecurityMenu.getMenu());
             popupSecurityMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -158,32 +160,24 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
         if (resultCode == Constants.LOGIN_FAILED) {
-            errorMessage("Usuario o clave invalidos");
+            PopupUtilities.errorMessage("Usuario o clave invalidos", this);
         } else{
             String cookie = resultIntent.getStringExtra("cookie");
             if (cookie!=null){
-                almacenarDatos(getUser(),getPass());
+                almacenarDatos(getUser(), getPass());
                 Intent mainIntent = new Intent(this,MainActivityOutsourcer.class);
-                mainIntent.putExtra("cookie",resultIntent.getStringExtra("cookie"));
-                mainIntent.putExtra("name",resultIntent.getStringExtra("name"));
-                mainIntent.putExtra("id",resultIntent.getStringExtra("id"));
-                mainIntent.putExtra("cliente",resultIntent.getStringExtra("cliente"));
-                mainIntent.putExtra("saldo",resultIntent.getStringExtra("saldo"));
-                mainIntent.putExtra("marcaE",resultIntent.getStringExtra("marcaE"));
-                mainIntent.putExtra("marcaS",resultIntent.getStringExtra("marcaS"));
-                mainIntent.putExtra("dir",resultIntent.getStringExtra("dir"));
-                mainIntent.putExtra("cel",resultIntent.getStringExtra("cel"));
+                IntentsUtils.copyExtras(resultIntent, mainIntent);
                 mainIntent.putExtra("user",getUser());
                 mainIntent.putExtra("pass",getPass());
                 startActivity(mainIntent);
                 finish();
             }else {
-                errorMessage("Error de conexión. Reintente");
+                PopupUtilities.errorMessage("Error de conexión. Reintente",this);
             }
         }
     }
 
-    public void errorMessage(String message) {
+    public void ErrorMessage(String message) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle(message);
         alertDialogBuilder
@@ -250,7 +244,7 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
         SharedPreferences.Editor ed = userData.edit();
         ed.putString("pass", "");
         ed.putString("modo","RecordarUser");
-        ed.commit();
+        ed.apply();
     }
      private void olvidarTodo(){
          SharedPreferences userData = getSharedPreferences("userdetails", MODE_PRIVATE);
@@ -258,13 +252,13 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
          ed.putString("pass", "");
          ed.putString("user", "");
          ed.putString("modo","OlvidarTodo");
-         ed.commit();
+         ed.apply();
      }
      private void securityMode(String modo) {
          SharedPreferences userData = getSharedPreferences("userdetails", MODE_PRIVATE);
          SharedPreferences.Editor ed = userData.edit();
          ed.putString("modo", modo);
-         ed.commit();
+         ed.apply();
          olvidarDatos();
      }
 
@@ -272,14 +266,14 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
         SharedPreferences userData = getSharedPreferences("userdetails", MODE_PRIVATE);
         SharedPreferences.Editor ed = userData.edit();
         ed.putString("user", user);
-        ed.commit();
+        ed.apply();
     }
 
     private void almacenaPass(String pass) {
         SharedPreferences userData = getSharedPreferences("userdetails", MODE_PRIVATE);
         SharedPreferences.Editor ed = userData.edit();
         ed.putString("pass", pass);
-        ed.commit();
+        ed.apply();
     }
     private String recuperarModo() {
         SharedPreferences userData = getSharedPreferences("userdetails", MODE_PRIVATE);
@@ -341,8 +335,7 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_login_outsourcer, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_login_outsourcer, container, false);
 
         }
     }

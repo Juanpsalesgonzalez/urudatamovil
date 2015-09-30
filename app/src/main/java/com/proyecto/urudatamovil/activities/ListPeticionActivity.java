@@ -61,23 +61,15 @@ public class ListPeticionActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        if (id == R.id.menu_main_action_close) {
-            finish();
-        }
-        if(id == android.R.id.home){
-            setResult(Constants.LOGIN_FAILED, null);
-            finish();
-        }
+        switch (item.getItemId()){
+            case  R.id.menu_peticion_close:
+                finish();
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.action_settings:
+                return true;
+            }
         return super.onOptionsItemSelected(item);
     }
 
@@ -128,7 +120,6 @@ public class ListPeticionActivity extends AppCompatActivity {
                         new AndrCalendarService(getContentResolver()).listCalendars();
                 for (Object o : listCal.entrySet()) {
                     Map.Entry mapEntry = (Map.Entry) o;
-                    int index = Integer.parseInt(mapEntry.getKey().toString());
                     submenuCal.add(0, R.id.peticiones_submenu_calendars, 0, mapEntry.getValue().toString());
                 }
                 return true;
@@ -158,9 +149,11 @@ public class ListPeticionActivity extends AppCompatActivity {
     }
 
     public void confirmTaskFinished(PeticionWebClient pet) {
-
         if (pet == null) {
             setResult(Constants.LOGIN_FAILED, null);
+            finish();
+        }else {
+            setResult(Constants.LOGIN_OK, null);
             finish();
         }
     }

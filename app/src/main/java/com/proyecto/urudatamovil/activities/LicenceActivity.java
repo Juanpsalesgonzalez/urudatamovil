@@ -19,9 +19,7 @@ import com.proyecto.urudatamovil.R;
 import com.proyecto.urudatamovil.utils.Constants;
 import com.proyecto.urudatamovil.utils.DateUtils;
 import com.proyecto.urudatamovil.utils.FechaDialogFragment;
-
-import java.util.Iterator;
-import java.util.Set;
+import com.proyecto.urudatamovil.utils.IntentsUtils;
 
 
 public class LicenceActivity extends AppCompatActivity {
@@ -37,7 +35,7 @@ public class LicenceActivity extends AppCompatActivity {
                     .commit();
         }
         Intent i = getIntent();
-        i.putExtra("descripcion","Licencia Reglamentaria"); // Default value
+        i.putExtra("descripcion", "Licencia Reglamentaria"); // Default value
     }
 
     @Override
@@ -58,9 +56,12 @@ public class LicenceActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_licencia_action_close) {
-            System.out.println("Cerrando  el MAIN....");
-            finish();
+        switch (item.getItemId()){
+            case  R.id.menu_licencia_action_close:
+                finish();
+            case android.R.id.home:
+                onBackPressed();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -146,10 +147,6 @@ public class LicenceActivity extends AppCompatActivity {
         this.getIntent().putExtra("Descripcion", descripcion);
     }
 
-    public void loginError() {
-        System.out.println("Login Error");
-    }
-
     public void confirmError() {
         System.out.println("Error al confirmar licencia");
     }
@@ -173,28 +170,19 @@ public class LicenceActivity extends AppCompatActivity {
 
     private Intent loadIntent(Intent newIntent){
 
-            TextView endDateTV, initDateTV;
-            String initDate, endDate, descripcion;
-
             Intent currIntent = getIntent();
-
             newIntent.putExtra("init",getDisplayFechaIni());
             newIntent.putExtra("end", getDisplayFechaFin());
-            Bundle extras = currIntent.getExtras();
+            IntentsUtils.copyExtras(currIntent,newIntent);
+            /*Bundle extras = currIntent.getExtras();
             if (extras != null) {
                 Set<String> keys = extras.keySet();
                 Iterator<String> it = keys.iterator();
-                //Log.e(LOG_TAG, "Dumping Intent start");
                 while (it.hasNext()) {
                     String key = it.next();
                     newIntent.putExtra(key,currIntent.getStringExtra(key));
                 }
-            }
-            //intent.putExtra("name", currIntent.getStringExtra("user"));
-            //intent.putExtra("pass", currIntent.getStringExtra("pass"));
-            //intent.putExtra("descripcion", descripcion);
-            //intent.putExtra("cert", currIntent.getStringExtra("cert"));
-            //intent.putExtra("saldo")
+            }*/
             return newIntent;
         }
 
@@ -202,19 +190,19 @@ public class LicenceActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK && requestCode == Constants.PHOTO_REQUEST_CODE) {
-            String photo = null;
-            if (data != null) {
-                photo = data.getExtras().getString("photo");
+        if (resultCode == RESULT_OK){
+            if (requestCode == Constants.PHOTO_REQUEST_CODE) {
+                String photo = null;
+                if (data != null) {
+                    photo = data.getExtras().getString("photo");
+                }
+                if (photo != null) {
+                    this.getIntent().putExtra("cert", photo);
+                }
+                confirmaLicencia(this.getCurrentFocus());
             }
-            if (photo != null) {
-                this.getIntent().putExtra("cert",photo);
-            }
-            confirmaLicencia(this.getCurrentFocus());
         }
-
-    }
+        }
    /**
      * A placeholder fragment containing a simple view.
      */

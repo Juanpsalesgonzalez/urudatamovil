@@ -16,9 +16,9 @@ public class WSLoginTask extends AsyncTask<String,String,Intent> {
 
     //Verifica Login. Devuelve un objeto Outsourcer o null
 
-    LoginConnectActivity actividad;
-    WSLoginServices wsLoginServices;
-    WSOutsourcerServices wsOutsourcerServices;
+    final LoginConnectActivity actividad;
+    private final WSLoginServices wsLoginServices;
+    private final WSOutsourcerServices wsOutsourcerServices;
 
     public WSLoginTask(LoginConnectActivity a) {
         actividad = a;

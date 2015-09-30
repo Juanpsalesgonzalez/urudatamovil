@@ -13,7 +13,7 @@
     android:visible="true"
     android:enabled="true"/>
 <item
-    android:title="Opciones"
+    android:title="@string/menu_action_opciones"
     android:id="@+id/menu_main_opciones"
     android:icon="@drawable/ic_action"
     app:showAsAction="always"

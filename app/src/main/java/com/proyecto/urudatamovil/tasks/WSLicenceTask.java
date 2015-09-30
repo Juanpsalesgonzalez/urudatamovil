@@ -13,10 +13,10 @@ import com.proyecto.urudatamovil.services.WSPeticionServices;
  */
 public class WSLicenceTask extends AsyncTask <String, String, PeticionWebClient>  {
 
-    private LicenceConnectActivity actividad;
+    private final LicenceConnectActivity actividad;
     //private WSLoginServices wsLoginServices;
-    private WSPeticionServices wsPeticionServices;
-    private WSCertificadoServices wsCertificadoServices;
+    private final WSPeticionServices wsPeticionServices;
+    private final WSCertificadoServices wsCertificadoServices;
 
     public WSLicenceTask(Activity a){
         actividad = (LicenceConnectActivity) a;
@@ -28,12 +28,11 @@ public class WSLicenceTask extends AsyncTask <String, String, PeticionWebClient>
     @Override
     protected PeticionWebClient doInBackground(String... params) {
 
-        String user, pass,endDate,initDate,comment, cert, cookie, petId;
+        String user,pass, endDate,initDate,comment, cert, cookie, petId;
         Long petIdL;
 
-
-        user = params[0];
-        pass = params[1];
+        user=params[0];
+        pass=params[1];
         cookie = params[2];
         endDate = params[3];
         initDate = params[4];

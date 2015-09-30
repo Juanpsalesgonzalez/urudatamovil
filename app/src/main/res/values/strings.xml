@@ -13,6 +13,8 @@
     <string name="outName_name_label">Nombre:</string>
 
     <string name="menu_action_close">Salir</string>
+    <string name="menu_action_opciones">opciones</string>
+
     <string name="button_close">Cerrar</string>
     <string name="button_licencia">Licencias</string>
     <string name="button_fechaIni">Fecha Inicio</string>
@@ -42,7 +44,6 @@
     <string name="title_activity_peticion_detail">Detalles de la Peticion</string>
     <string name="title_activity_urudata">UrudataActivity</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_login">Conectando....</string>
     <string name="title_activity_certificado_connect">CertificadoConnectActivity</string>
     <string name="title_activity_calendar">CalendarActivity</string>
@@ -50,4 +51,12 @@
     <string name="title_activity_list_solicitudes">ListSolicitudes</string>
     <string name="title_activity_login_outsourcer">LoginOutsourcerActivity</string>
 
+    <string name="main_security_menu_olvidarTodo">Olvidar usuario y password</string>
+    <string name="main_security_menu_recordarUsuario">Recordar usuario</string>
+    <string name="main_security_menu_recordarTodo">Recordar usuario y password</string>
+
+    <string name="peticiones_menu_agregar">Agregar al calendario</string>
+    <string name="peticiones_menu_certificado_detalles">Más detalles</string>
+    <string name="peticiones_menu_certificado_adjCertificado">Adjuntar Certificado</string>
+   <string name="nulo"> </string>
 </resources>

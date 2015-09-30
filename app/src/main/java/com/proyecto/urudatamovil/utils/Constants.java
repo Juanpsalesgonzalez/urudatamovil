@@ -30,6 +30,6 @@ public class Constants {
     public final static int RESULT_OK=130;
     public final static int RESULT_FAILED=131;
     public final static int ACTION_CERTIFICATE=140;
-    public final static int LOG=;
+    public final static String LOG="com.proyecto.urudata";
 
 }

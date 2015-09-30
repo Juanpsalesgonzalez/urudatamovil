@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
         <item android:id="@+id/peticiones_menu_certificado"
             android:icon="@drawable/checked_32"
-            android:title="Adjuntar Certificado"/>
+            android:title="@string/peticiones_menu_certificado_adjCertificado"/>
         <item android:id="@+id/peticiones_menu_detalles"
-            android:title="Mas detalles" />
+            android:title="@string/peticiones_menu_certificado_detalles" />
         <item android:id="@+id/peticiones_menu_calendario"
-            android:title="Agregar al Calendario">
+            android:title="@string/peticiones_menu_agregar">
             <menu>
                 <item android:id="@+id/peticiones_submenu_calendars"
-                android:title="placeholder"/>
+                android:title="@string/nulo"/>
             </menu>
         </item>
 </menu>

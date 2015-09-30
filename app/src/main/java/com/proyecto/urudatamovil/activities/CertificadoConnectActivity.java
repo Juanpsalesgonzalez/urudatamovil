@@ -41,7 +41,6 @@ public class CertificadoConnectActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.menu_main_action_close) {
-            System.out.println("Cerrando  el MAIN....");
             finish();
         }
         return super.onOptionsItemSelected(item);

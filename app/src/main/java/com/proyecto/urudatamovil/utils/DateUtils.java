@@ -69,6 +69,7 @@ public class DateUtils {
     // Convierte un día de la semana en texto al numero correspondiente.
     // Cubre el caso de que tenga acento o no lo tenga.
 
+    @SuppressWarnings("WeakerAccess")
     public static int dayOfWeekNumeric(String dow) {
         String[] days = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
 

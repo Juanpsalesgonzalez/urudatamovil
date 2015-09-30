@@ -20,10 +20,10 @@ import me.iwf.photopicker.utils.PhotoPickerIntent;
 public class PhotoActivity extends AppCompatActivity{
 
 
-    RecyclerView recyclerView;
-    PhotoAdapter photoAdapter;
+    private RecyclerView recyclerView;
+    private PhotoAdapter photoAdapter;
 
-    ArrayList<String> selectedPhotos = new ArrayList<>();
+    private final ArrayList<String> selectedPhotos = new ArrayList<>();
 
     public final static int PHOTO_REQUEST_CODE = 123;
 

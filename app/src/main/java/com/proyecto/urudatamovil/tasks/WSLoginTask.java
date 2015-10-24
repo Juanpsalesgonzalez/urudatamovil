@@ -14,7 +14,6 @@ import com.proyecto.urudatamovil.utils.IntentsUtils;
  */
 public class WSLoginTask extends AsyncTask<String,String,Intent> {
 
-    //Verifica Login. Devuelve un objeto Outsourcer o null
 
     final LoginConnectActivity actividad;
     private final WSLoginServices wsLoginServices;

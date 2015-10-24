@@ -19,12 +19,10 @@ import com.proyecto.urudatamovil.utils.IntentsUtils;
 public class WSConfirmTask extends AsyncTask <String, String, Intent> {
 
     private final ConfirmActivity actividad;
-   // private WSLoginServices wsLoginServices;
     private final WSOutsourcerServices wsOutsourcerServices;
 
     public WSConfirmTask(Activity a){
         actividad = (ConfirmActivity) a;
-   //     wsLoginServices = new WSLoginServices();
         wsOutsourcerServices = new WSOutsourcerServices();
     }
 

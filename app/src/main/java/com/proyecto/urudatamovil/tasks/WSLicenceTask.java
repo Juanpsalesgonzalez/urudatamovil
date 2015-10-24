@@ -14,13 +14,11 @@ import com.proyecto.urudatamovil.services.WSPeticionServices;
 public class WSLicenceTask extends AsyncTask <String, String, PeticionWebClient>  {
 
     private final LicenceConnectActivity actividad;
-    //private WSLoginServices wsLoginServices;
     private final WSPeticionServices wsPeticionServices;
     private final WSCertificadoServices wsCertificadoServices;
 
     public WSLicenceTask(Activity a){
         actividad = (LicenceConnectActivity) a;
-//        wsLoginServices = new WSLoginServices();
         wsPeticionServices = new WSPeticionServices();
         wsCertificadoServices = new WSCertificadoServices();
     }
@@ -39,10 +37,6 @@ public class WSLicenceTask extends AsyncTask <String, String, PeticionWebClient>
         comment = params[5];
         cert= params[6];
 
-       // cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
-       // if (cookie ==null){
-       // (())     return null;
-       // }
 
         PeticionWebClient peticion = wsPeticionServices.setLicense(user, cookie, initDate, endDate, comment);
         if (peticion ==null){

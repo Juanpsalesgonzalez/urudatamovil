@@ -1,5 +1,7 @@
 package com.proyecto.urudatamovil.services;
 
+import android.util.Log;
+
 import com.proyecto.urudatamovil.utils.Constants;
 
 import org.springframework.http.HttpEntity;
@@ -20,7 +22,7 @@ public class WSLoginServices {
     public ResponseEntity loginToWS(String user, String pass) {
 
         String url = Constants.URL_LOGIN_PROCESS;
-        RestTemplate rT = new RestTemplate(true); //Construye con Default Content Handlers
+        RestTemplate rT = new RestTemplate(true);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-type", "application/x-www-form-urlencoded");
@@ -34,7 +36,7 @@ public class WSLoginServices {
         try {
             response = rT.exchange(url, HttpMethod.POST, entity, ResponseEntity.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.v(Constants.TAG, e.getMessage());
         }
          if(response == null) {
             return null;
@@ -63,11 +65,11 @@ public class WSLoginServices {
                 HttpHeaders headers = response.getHeaders();
                 List<String> headerFieldValue = headers.get("Set-Cookie");
                 cookieField = headerFieldValue.get(0);
-                cookieSubFields = cookieField.split(";");//
-                cookieValue = cookieSubFields[0];  // Devuelve en formato JSESSIONID=xxxxxxxxx
+                cookieSubFields = cookieField.split(";");
+                cookieValue = cookieSubFields[0];
                 return cookieValue;
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.v(Constants.TAG, e.getMessage());
             }
         }
         return null;

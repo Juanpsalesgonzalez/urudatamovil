@@ -3,6 +3,7 @@ package com.proyecto.urudatamovil.services;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.utils.Constants;
@@ -41,7 +42,6 @@ public class WSCertificadoServices {
 
     public String setCert(String cookie, String petId, String cert) {
 
-       // Convertir a png comprimido.
        Bitmap bitmap;
        File f= new File(cert);
        ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -52,20 +52,17 @@ public class WSCertificadoServices {
            bitmap = BitmapFactory.decodeStream(new FileInputStream(f), null, options);
            bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
        } catch (FileNotFoundException e) {
-           e.printStackTrace();
+           Log.v(Constants.TAG, e.getMessage());
        }
 
        String filename = "Certificado_" + petId + ".png";
        ContentBody contentPart = new ByteArrayBody(bos.toByteArray(), filename);
 
-       // Convertido
 
        MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
        reqEntity.addPart("picture", contentPart);
- //      String response = multipost("http://server.com", reqEntity);
        try {
            URL url = new URL(Constants.URL_UPLOAD_CERT + "?petId=" + petId );
-           //  HttpResponse response = null;
 
            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -91,8 +88,8 @@ public class WSCertificadoServices {
            }
 
        } catch (Exception e) {
-           e.printStackTrace();
-          // Log.e(TAG, "multipart post error " + e + "(" + urlString + ")");
+
+           Log.e(Constants.TAG, "multipart post error ");
        }
        return null;
    }
@@ -107,13 +104,13 @@ public class WSCertificadoServices {
                 builder.append(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.v(Constants.TAG, e.getMessage());
         } finally {
             if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.v(Constants.TAG, e.getMessage());
                 }
             }
         }

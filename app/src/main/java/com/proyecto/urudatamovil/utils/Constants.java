@@ -6,9 +6,8 @@ package com.proyecto.urudatamovil.utils;
  */
 public class Constants {
 
-  //  private static final String ip_ctr="http://ctr.urudata.com/urudataTEST";
     private static final String ip_ctr="200.71.4.212/urudataTEST";
-  //  private static final String ip_ctr="192.168.8.100:8080/urudata";
+    /*private static final String ip_ctr="192.168.8.100:8080/urudata"  */
     public static final String URL_CONFIRM="http://" + ip_ctr + "/rest/confirm";
     public static final String URL_OUTBYUSER="http://" + ip_ctr + "/rest/outById";
     public static final String URL_SET_LICENSE="http://" + ip_ctr + "/rest/setLicence";
@@ -30,6 +29,6 @@ public class Constants {
     public final static int RESULT_OK=130;
     public final static int RESULT_FAILED=131;
     public final static int ACTION_CERTIFICATE=140;
-    public final static String LOG="com.proyecto.urudata";
+    public final static String TAG="com.proyecto.urudata";
 
 }

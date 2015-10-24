@@ -52,7 +52,6 @@ public class PhotoActivity extends AppCompatActivity{
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        //  Carga lista con fotos seleccionadas.
         List<String> photos = null;
         if (resultCode == RESULT_OK && requestCode == PHOTO_REQUEST_CODE) {
             if (data != null) {
@@ -64,12 +63,10 @@ public class PhotoActivity extends AppCompatActivity{
 
                 selectedPhotos.addAll(photos);
             }
-            //photoAdapter.notifyDataSetChanged();
 
-            // Devuelve la primera foto selecionada.
             Bundle b = new Bundle();
             b.putString("photo",selectedPhotos.get(0));
-            Intent i = getIntent(); //gets the intent that called this intent
+            Intent i = getIntent();
             i.putExtras(b);
             i.putExtra("photo",selectedPhotos.get(0));
             setResult(Activity.RESULT_OK, i);

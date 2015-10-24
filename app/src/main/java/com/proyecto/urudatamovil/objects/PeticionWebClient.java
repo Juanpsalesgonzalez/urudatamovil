@@ -9,7 +9,6 @@ import android.os.Parcelable;
  */
 public class PeticionWebClient implements Parcelable{
 
-    // Atributos
     private Long idPeticion;
     private String inicio, fin;
     private String fechaSolicitud;
@@ -102,7 +101,6 @@ public class PeticionWebClient implements Parcelable{
         this.estado = estado;
     }
 
-    // Metodos para poder colocar el objeto en un Intent
     public void readFromParcel(Parcel in ) {
 
         idPeticion=in.readLong();

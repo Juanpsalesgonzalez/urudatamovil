@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +32,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
 
     private static boolean isQuit = false;
     private static boolean firstRun = true;
-// Metodos de Android, se sobrescriben,
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
                     .add(R.id.container, new PlaceholderFragment()).commit();
         }
         if (savedInstanceState != null) {
-            // Restore value of members from saved state
             Intent currIntent=getIntent();
             currIntent.putExtras(savedInstanceState);
         }
@@ -102,10 +101,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         super.onResume();
         IntentsUtils.normalizaIntent(this.getIntent());
         String s =this.getIntent().getStringExtra("copiado");
-        if (s==null){
-            s="No Copiado";
-        }
-        System.out.println(s);
         TextView textName = (TextView) findViewById(R.id.textName);
         textName.setText(getName() + "\n" + getCliente() + "\n" + getSaldo());
         String marcaE, marcaS;
@@ -136,7 +131,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
                 imageSem.setImageResource(R.drawable.rojo24);
             } else {
                 imageSem.setImageResource(R.drawable.verde24);
-                //switchES.setChecked(false);
             }
         switchES.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -161,7 +155,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         startActivityForResult(marcaIntent,Constants.ACTION_MARCA,null);
     }
 
-    // Llamado al presionar Licencia
     public void solicitarLicencia(View view) {
         Intent licIntent = new Intent(this, LicenceActivity.class);
         Intent currIntent = getIntent();
@@ -169,7 +162,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         startActivityForResult(licIntent, Constants.ACTION_LICENCIA, null);
     }
 
-    // Llamado al presionar Peticiones,
     public void verPeticiones(View view) {
         Intent petIntent = new Intent(this, ListPeticionActivity.class);
         Intent currIntent = getIntent();
@@ -186,7 +178,7 @@ public class MainActivityOutsourcer extends AppCompatActivity {
             switch (requestCode) {
                 case Constants.ACTION_MARCA:
                     if (resultCode != Constants.RESULT_OK) {
-                        System.out.println("ERROR");
+                        Log.v(Constants.TAG, "Error al volver de action marca");
                     } else {
                         if (data!=null){
                             IntentsUtils.copyExtras(data,this.getIntent());
@@ -196,7 +188,7 @@ public class MainActivityOutsourcer extends AppCompatActivity {
                 case Constants.ACTION_LICENCIA:
                     break;
                 case Constants.ACTION_PETICION:
-                    System.out.println("Peticiones");
+                    Log.v(Constants.TAG, "Peticion");
                     break;
             }
 
@@ -242,7 +234,6 @@ public class MainActivityOutsourcer extends AppCompatActivity {
     }
 
 
-// Fragmento de pantalla
 
     public static class PlaceholderFragment extends Fragment {
 

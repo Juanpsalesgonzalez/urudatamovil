@@ -1,5 +1,7 @@
 package com.proyecto.urudatamovil.utils;
 
+import android.util.Log;
+
 import com.proyecto.urudatamovil.objects.OutsourcerWebClient;
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
 
@@ -41,10 +43,8 @@ public class HttpResponseUtils {
             cel     =  outJSON.get("celular").toString();
             saldo   =  outJSON.get("saldo").toString();
             cliente =  outJSON.get("cliente").toString();
-            //saldo = "10";
-            //cliente = "consejo de formacion en educacion";
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.v(Constants.TAG, e.getMessage());
             return null;
         }
 
@@ -72,7 +72,7 @@ public class HttpResponseUtils {
                 PeticionWebClient p = hashMapToPeticion(petHashMap);
                 peticiones.add(i,p);
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.v(Constants.TAG, e.getMessage());
                 return null;
             }
         }
@@ -84,11 +84,9 @@ public class HttpResponseUtils {
         Long idLong,idOutsourcerLong;
         Integer id, idOutsourcer;
         String  descripcion, inicia, fin, status ;
-        System.out.println("hola");
 
         Object o = petHashMap.get("id");
 
-        System.out.println("hola");
         id = (Integer) petHashMap.get("id");
         idLong = id.longValue();
         idOutsourcer= (Integer) petHashMap.get("idOutsourcer");

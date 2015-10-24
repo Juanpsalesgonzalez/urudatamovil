@@ -39,10 +39,9 @@ public class PeticionAdapter extends ArrayAdapter<PeticionWebClient> {
         String line = p.getIdPeticion() + " - " + p.getDescripcion() + " - " + p.getInicio();
         textView.setText(line);
 
-        // Change icon based on name
         String s = p.getEstado();
         if (s==null){
-            s="Esperando Aprobacion"; // El estado no puede ser nulo
+            s="Esperando Aprobacion";
         }
         if (s.equals("Aprobado")) {
                 imageView.setImageResource(R.drawable.checked_32);

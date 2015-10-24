@@ -5,8 +5,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
+import android.util.Log;
 
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
+import com.proyecto.urudatamovil.utils.Constants;
 import com.proyecto.urudatamovil.utils.DateUtils;
 
 import java.util.Calendar;
@@ -26,10 +28,10 @@ public class AndrCalendarService {
     private static final int PROJECTION_OWNER_ACCOUNT_INDEX = 3;
 
     private static final String[] EVENT_PROJECTION = new String[]{
-            CalendarContract.Calendars._ID,                           // 0
-            CalendarContract.Calendars.ACCOUNT_NAME,                  // 1
-            CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,         // 2
-            CalendarContract.Calendars.OWNER_ACCOUNT                  // 3
+            CalendarContract.Calendars._ID,
+            CalendarContract.Calendars.ACCOUNT_NAME,
+            CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
+            CalendarContract.Calendars.OWNER_ACCOUNT
     };
 
     public AndrCalendarService(ContentResolver cr) {
@@ -64,7 +66,7 @@ public class AndrCalendarService {
 
     public boolean addPeticionToCalendar(PeticionWebClient pet, Long calId) {
 
-        if (pet.getEstado().equals("Aprobado")) {
+        if ("Aprobado".equals(pet.getEstado())) {
             String title = pet.getDescripcion();
             String descripcion = "Solicitud : " + pet.getIdPeticion().toString();
 
@@ -91,9 +93,9 @@ public class AndrCalendarService {
             val.put(CalendarContract.Events.EVENT_TIMEZONE, "GMT+3");
             val.put(CalendarContract.Events.CALENDAR_ID, calId);
             try {
-                Uri uri = contentResolver.insert(CalendarContract.Events.CONTENT_URI, val);
+                contentResolver.insert(CalendarContract.Events.CONTENT_URI, val);
             }catch (Exception e){
-                e.printStackTrace();
+                Log.v(Constants.TAG, e.getMessage());
             }
             return true;
         }else{

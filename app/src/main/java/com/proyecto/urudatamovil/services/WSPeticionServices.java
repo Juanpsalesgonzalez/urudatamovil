@@ -1,5 +1,7 @@
 package com.proyecto.urudatamovil.services;
 
+import android.util.Log;
+
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.utils.Constants;
 import com.proyecto.urudatamovil.utils.HttpResponseUtils;
@@ -25,8 +27,8 @@ public class WSPeticionServices {
     public PeticionWebClient setLicense(String user, String cookie, String initDate, String endDate, String descripcion) {
             String url;
             String url_user, url_idate, url_edate, url_desc;
-            String sep = "?";    //url_separator
-            String fsep = "&"; //url_field_separator
+            String sep = "?";
+            String fsep = "&";
             url_user = "username=" + user;
             url_idate = "fechaini=" + initDate;
             url_edate = "fechafin=" + endDate;
@@ -34,7 +36,6 @@ public class WSPeticionServices {
 
             url = Constants.URL_SET_LICENSE;
             url = url + sep + url_user + fsep + url_idate + fsep + url_edate + fsep + url_desc;
-            System.out.println("URL " + url);
             RestTemplate rT = new RestTemplate(true);
             HttpHeaders headers = new HttpHeaders();
             headers.set("Cookie", cookie);
@@ -46,14 +47,13 @@ public class WSPeticionServices {
             try {
                 response = rT.exchange(url, HttpMethod.GET, requestEntity, String.class);
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.v(Constants.TAG, e.getMessage());
             }
 
             if (response == null) {
-                System.out.println("Response NULL");
+                Log.v(Constants.TAG, "Response NULL");
                 return null;
             }
-            System.out.println(response.toString());
             String s = response.getBody();
             Long outId = null;
             Long petId = null;
@@ -66,7 +66,7 @@ public class WSPeticionServices {
                 descripcion=j.getString("descripcion");
 
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.v(Constants.TAG, e.getMessage());
             }
 
             PeticionWebClient p = new PeticionWebClient(petId, initDate, endDate, outId, descripcion);
@@ -103,11 +103,11 @@ public class WSPeticionServices {
 
             response = rT.exchange(url, HttpMethod.GET, requestEntity, ArrayList.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.v(Constants.TAG, e.getMessage());
         }
 
         if (response == null) {
-            System.out.println("Response NULL");
+            Log.v(Constants.TAG, "Response NULL");
             return null;
         }
 

@@ -1,5 +1,7 @@
 package com.proyecto.urudatamovil.services;
 
+import android.util.Log;
+
 import com.proyecto.urudatamovil.objects.OutsourcerWebClient;
 import com.proyecto.urudatamovil.utils.Constants;
 import com.proyecto.urudatamovil.utils.HttpResponseUtils;
@@ -49,9 +51,8 @@ public class WSOutsourcerServices {
         rT.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         try {
             response = rT.exchange(url, HttpMethod.GET, requestEntity, String.class);
-            // TO DO  JACKSON Converter
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.v(Constants.TAG, e.getMessage());
         }
         if (response == null) {
             return null;

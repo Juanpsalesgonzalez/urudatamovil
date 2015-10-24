@@ -33,7 +33,6 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
      */
 
     private static boolean isQuit = false;
-// Metodos de Android, se sobrescriben,
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -139,7 +138,6 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
             popupSecurityMenu.show();
     }
 
-// Metodos propios de la app
 
     public static void setQuit(boolean flag) {
         isQuit = flag;
@@ -196,12 +194,6 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
         alertDialogBuilder.show();
     }
 
-    // Metodos auxiliares
-
-
-//----------------------------------------------------
-// Datos de sesion -
-//----------------------------------------------------
 
     private String getUser() {
         EditText editTextName = (EditText) findViewById(R.id.id_outsourcer);
@@ -235,9 +227,6 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
         return intent;
     }
 
-//--------------------------------------------------------
-// Recordar usuario y pass - Persiste entre sesiones
-//--------------------------------------------------------
 
     private void olvidarPass() {
         SharedPreferences userData = getSharedPreferences("userdetails", MODE_PRIVATE);
@@ -325,7 +314,6 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
      }
 
 
-// Fragmento de pantalla
 
     public static class PlaceholderFragment extends Fragment {
 

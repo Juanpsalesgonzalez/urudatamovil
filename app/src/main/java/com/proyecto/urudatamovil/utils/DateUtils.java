@@ -16,12 +16,11 @@ public class DateUtils {
         String date;
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH) + 1;  //Empiezan de 0
+        int month = c.get(Calendar.MONTH) + 1;
         int day = c.get(Calendar.DAY_OF_MONTH);
         date = day + "/" + month + "/" + year;
         return date;
     }
-// TO DO.
 
     public static boolean validaFecha(String fecha) {
         return true;
@@ -66,8 +65,6 @@ public class DateUtils {
         }
     }
 
-    // Convierte un día de la semana en texto al numero correspondiente.
-    // Cubre el caso de que tenga acento o no lo tenga.
 
     @SuppressWarnings("WeakerAccess")
     public static int dayOfWeekNumeric(String dow) {
@@ -87,8 +84,6 @@ public class DateUtils {
     }
 
 
-    // Devuelve la fecha del proximo dia de la semana.
-    // Por ej, la fecha del proximo martes.
 
     public static Date getNextOccurenceOfDay(String dayOfWeek) {
 

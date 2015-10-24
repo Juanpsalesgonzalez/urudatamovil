@@ -15,12 +15,10 @@ import java.util.ArrayList;
 public class WSPeticionTask extends AsyncTask <String, String, ArrayList<PeticionWebClient>> {
 
     private final ListPeticionActivity actividad;
-//    private WSLoginServices wsLoginServices ;
     private final WSPeticionServices wsPeticionServices;
 
     public WSPeticionTask(ListPeticionActivity a){
         actividad=a;
-//        wsLoginServices = new WSLoginServices();
         wsPeticionServices = new WSPeticionServices();
     }
 
@@ -38,10 +36,6 @@ public class WSPeticionTask extends AsyncTask <String, String, ArrayList<Peticio
         fechaFin=params[4];
         estado=params[5];
 
-       // cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
-       // if (cookie ==null){
-       //     return null;
-       // }
         listaPet= wsPeticionServices.listaPet(user, cookie, fechaIni, fechaFin, estado);
         return listaPet;
     }

@@ -54,7 +54,6 @@ public class ListPeticionActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_list_peticion, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -64,6 +63,7 @@ public class ListPeticionActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case  R.id.menu_peticion_close:
                 finish();
+                break;
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -83,35 +83,29 @@ public class ListPeticionActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        // Accion a tomar segun el menu contextual
 
         PeticionWebClient peticion;
-        // Si es en el submenu no puede crear la peticion.
         if (item.getItemId()==R.id.peticiones_submenu_calendars){
 
             return insertInCalendar(item);
         }
-        // Si es el primer menu contextual, se puede ver la peticion.
         peticion = peticionFromMenu(item);
         this.savePeticion(peticion);
 
         switch (item.getItemId()) {
             case R.id.peticiones_menu_certificado:
                 if (peticion != null) {
-                    // Llama al selector de fotos.
                     Intent certIntent = new Intent(this, PhotoActivity.class);
                     startActivityForResult(certIntent, Constants.PHOTO_REQUEST_CODE);
-                    // Recuerda la peticion.
                     this.savePeticion(peticion);
                 }
                 return true;
             case R.id.peticiones_menu_detalles:
                 if (peticion != null) {
-                    //Cargar detalles (peticion)
                     Intent petDetail = new Intent(this, PeticionDetailActivity.class);
                     petDetail.putExtra("peticion", peticion);
                     startActivity(petDetail);
-                }//finish();
+                }
                 return true;
             case R.id.peticiones_menu_calendario:
                 Menu submenuCal = item.getSubMenu();
@@ -158,7 +152,6 @@ public class ListPeticionActivity extends AppCompatActivity {
         }
     }
 
-    // Auxiliares
 
     private String getUser() {
         Intent currentIntent = getIntent();
@@ -168,14 +161,6 @@ public class ListPeticionActivity extends AppCompatActivity {
     private String getPass() {
         Intent currentIntent = getIntent();
         return currentIntent.getStringExtra("pass");
-    }
-
-    private Long getPetId() {
-        PeticionWebClient pet = this.getPeticion();
-        if (pet != null) {
-            return pet.getIdPeticion();
-        }
-        return null;
     }
 
     private void savePeticion(PeticionWebClient pet) {

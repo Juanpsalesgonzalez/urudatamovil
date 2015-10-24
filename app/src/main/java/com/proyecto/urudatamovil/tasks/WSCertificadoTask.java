@@ -13,7 +13,6 @@ import com.proyecto.urudatamovil.services.WSCertificadoServices;
 public class WSCertificadoTask extends AsyncTask <String, String, PeticionWebClient> {
 
     private final CertificadoConnectActivity actividad;
-//    private WSLoginServices wsLoginServices=new WSLoginServices();
     private final WSCertificadoServices wsCertificadoServices= new WSCertificadoServices();
 
     public WSCertificadoTask(CertificadoConnectActivity a) {
@@ -30,10 +29,6 @@ public class WSCertificadoTask extends AsyncTask <String, String, PeticionWebCli
         petId=params[3];
         cert=params[4];
 
-       // cookie= wsLoginServices.getCookie(wsLoginServices.loginToWS(user, pass));
-       //  if (cookie ==null){
-        //     return null;
-       //  }
 
        PeticionWebClient peticion = wsCertificadoServices.setCertificate(cookie, petId, cert);
         if (peticion ==null){

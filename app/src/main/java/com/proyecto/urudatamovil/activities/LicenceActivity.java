@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,7 +36,7 @@ public class LicenceActivity extends AppCompatActivity {
                     .commit();
         }
         Intent i = getIntent();
-        i.putExtra("descripcion", "Licencia Reglamentaria"); // Default value
+        i.putExtra("descripcion", "Licencia Reglamentaria");
     }
 
     @Override
@@ -49,7 +50,6 @@ public class LicenceActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_licencia, menu);
         return super.onCreateOptionsMenu(menu);
@@ -66,7 +66,6 @@ public class LicenceActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // No son seters o getters, son para poner y leer de la Vista.
     private void setDisplayFechaFin(String date) {
         EditText editText = (EditText) this.findViewById(R.id.editText_fechaFin);
         editText.setText(date);
@@ -118,10 +117,8 @@ public class LicenceActivity extends AppCompatActivity {
     }
 
     public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
         String descripcion=null;
-        // Check which radio button was clicked
         switch (view.getId()) {
             case R.id.radio_lic_comun:
                 if (checked) {
@@ -148,7 +145,7 @@ public class LicenceActivity extends AppCompatActivity {
     }
 
     public void confirmError() {
-        System.out.println("Error al confirmar licencia");
+        Log.v(Constants.TAG, "Error al confirmar licencia");
     }
 
 
@@ -161,8 +158,8 @@ public class LicenceActivity extends AppCompatActivity {
 
     public void confirmaLicencia(View v){
 
-        // Es necesario crear un Intent y un Activity para poder llamar
-        // al Async Task. El Async Task solo se puede llamar del main/
+        /* Es necesario crear un Intent y un Activity para poder llamar
+         al Async Task. El Async Task solo se puede llamar del main */
         Intent conIntent = new Intent(this,LicenceConnectActivity.class);
         conIntent=loadIntent(conIntent);
         startActivityForResult(conIntent, Constants.CONFIRM_LICENCE_CODE);

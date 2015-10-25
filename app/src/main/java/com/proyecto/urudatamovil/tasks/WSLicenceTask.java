@@ -8,9 +8,6 @@ import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.services.WSCertificadoServices;
 import com.proyecto.urudatamovil.services.WSPeticionServices;
 
-/**
- * Created by juan on 26/04/15.
- */
 public class WSLicenceTask extends AsyncTask <String, String, PeticionWebClient>  {
 
     private final LicenceConnectActivity actividad;
@@ -30,7 +27,6 @@ public class WSLicenceTask extends AsyncTask <String, String, PeticionWebClient>
         Long petIdL;
 
         user=params[0];
-        pass=params[1];
         cookie = params[2];
         endDate = params[3];
         initDate = params[4];

@@ -4,9 +4,6 @@ package com.proyecto.urudatamovil.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by juan on 07/07/15.
- */
 public class PeticionWebClient implements Parcelable{
 
     private Long idPeticion;

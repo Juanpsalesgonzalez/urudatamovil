@@ -14,9 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * Created by juan on 01/08/15.
- */
 public class WSOutsourcerServices {
 
     public OutsourcerWebClient confirma(String cookie, String user){

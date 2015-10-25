@@ -15,9 +15,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-/**
- * Created by juan on 19/08/15.
- */
 public class AndrCalendarService {
 
     private final ContentResolver contentResolver;
@@ -75,8 +72,8 @@ public class AndrCalendarService {
             if (initDate==null || endDate==null){
                 return false;
             }
-            long startMillis = 0;
-            long endMillis = 0;
+            long startMillis;
+            long endMillis;
             Calendar beginTime = Calendar.getInstance();
             beginTime.setTime(initDate);
             startMillis = beginTime.getTimeInMillis();

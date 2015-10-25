@@ -7,9 +7,6 @@ import com.proyecto.urudatamovil.activities.CertificadoConnectActivity;
 import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import com.proyecto.urudatamovil.services.WSCertificadoServices;
 
-/**
- * Created by juan on 26/04/15.
- */
 public class WSCertificadoTask extends AsyncTask <String, String, PeticionWebClient> {
 
     private final CertificadoConnectActivity actividad;

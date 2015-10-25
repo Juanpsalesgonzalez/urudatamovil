@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -100,54 +101,58 @@ public class MainActivityOutsourcer extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         IntentsUtils.normalizaIntent(this.getIntent());
-        String s =this.getIntent().getStringExtra("copiado");
         TextView textName = (TextView) findViewById(R.id.textName);
-        textName.setText(getName() + "\n" + getCliente() + "\n" + getSaldo());
-        String marcaE, marcaS;
-        String estado;
-        marcaE = getMarcaE();
-        marcaS = getMarcaS();
-        if (marcaE.equals("")) {
-            estado = "out";
-        } else {
-            if (marcaS.equals("")) {
-                estado = "in";
-            } else {
-                estado = "out";
-            }
-        }
-
+        String datos;
         final ImageView imageSem = (ImageView) findViewById(R.id.imageView_Semaforo);
         final Switch switchES = (Switch) findViewById(R.id.switchEntradaSalida);
 
-        switchES.setTextOn("Entrada");
-        switchES.setTextOff("Salida");
-        switchES.setTrackResource(R.drawable.abc_switch_thumb_material);
-            if (estado.equals("out")) {
-                if (firstRun){
-                    switchES.setChecked(true);
-                    firstRun=false;
-                }
-                imageSem.setImageResource(R.drawable.rojo24);
+        if ("ROLE_OUTSOURCER".equals(getRole())) {
+            String marcaE, marcaS, estado;
+            marcaE = getMarcaE();
+            marcaS = getMarcaS();
+            if (marcaE.equals("")) {
+                estado = "out";
             } else {
-                imageSem.setImageResource(R.drawable.verde24);
-            }
-        switchES.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                                         boolean isChecked) {
-               marcarES();
-                /*if (isChecked) {
-                    imageSem.setImageResource(R.drawable.verde24);
+                if (marcaS.equals("")) {
+                    estado = "in";
                 } else {
-                    imageSem.setImageResource(R.drawable.rojo24);
-                }*/
+                    estado = "out";
+                }
             }
-        });
+            textName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+            datos = getName() + "\n" +  getCliente() + "\n" + "Entrada: " + marcaE + "\n" + "Salida: " + marcaS + "\n" + "Saldo de Licencia: " + getSaldo() +" días";
+            switchES.setTextOn("Entrada");
+            switchES.setTextOff("Salida");
+            switchES.setTrackResource(R.drawable.abc_switch_thumb_material);
+            if (firstRun) {
+
+                if (estado.equals("out")) {
+                    imageSem.setImageResource(R.drawable.rojo28);
+                    switchES.setChecked(true);
+                } else {
+                    imageSem.setImageResource(R.drawable.verde28);
+                    switchES.setChecked(false);
+                }
+                firstRun = false;
+            }
+            switchES.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView,
+                                             boolean isChecked) {
+                    marcarES();
+                }
+            });
+        } else {
+
+            datos = getName() + "\n" + "Saldo de Licencia: " + getSaldo() + " días";
+            switchES.setEnabled(false);
+            switchES.setVisibility(View.GONE);
+            imageSem.setImageResource(R.drawable.home);
+        }
+        textName.setText(datos);
 
     }
-    @SuppressWarnings("WeakerAccess")
     public void marcarES() {
         Intent marcaIntent = new Intent(this, ConfirmActivity.class);
         marcaIntent.putExtra("cookie", getCookie());
@@ -233,6 +238,9 @@ public class MainActivityOutsourcer extends AppCompatActivity {
         return getIntent().getStringExtra("user");
     }
 
+    private String getRole(){
+        return getIntent().getStringExtra("role");
+    }
 
 
     public static class PlaceholderFragment extends Fragment {

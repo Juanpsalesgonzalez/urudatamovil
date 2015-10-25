@@ -26,16 +26,16 @@ public class WSPeticionServices {
     @SuppressWarnings("unchecked")
     public PeticionWebClient setLicense(String user, String cookie, String initDate, String endDate, String descripcion) {
             String url;
-            String url_user, url_idate, url_edate, url_desc;
+            String urlUser, urlIdate, urlEdate, urlDesc;
             String sep = "?";
             String fsep = "&";
-            url_user = "username=" + user;
-            url_idate = "fechaini=" + initDate;
-            url_edate = "fechafin=" + endDate;
-            url_desc = "desc=" + descripcion;
+            urlUser = "username=" + user;
+            urlIdate = "fechaini=" + initDate;
+            urlEdate = "fechafin=" + endDate;
+            urlDesc = "desc=" + descripcion;
 
             url = Constants.URL_SET_LICENSE;
-            url = url + sep + url_user + fsep + url_idate + fsep + url_edate + fsep + url_desc;
+            url = url + sep + urlUser + fsep + urlIdate + fsep + urlEdate + fsep + urlDesc;
             RestTemplate rT = new RestTemplate(true);
             HttpHeaders headers = new HttpHeaders();
             headers.set("Cookie", cookie);

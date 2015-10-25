@@ -21,6 +21,7 @@ public class OutsourcerWebClient implements Parcelable {
     private String cel;
     private String direccion;
     private String cliente;
+    private String role;
 
     public OutsourcerWebClient(String n, String i){
         id=i;
@@ -75,6 +76,13 @@ public class OutsourcerWebClient implements Parcelable {
         this.cliente = cliente;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public void readFromParcel(Parcel in ) {
 

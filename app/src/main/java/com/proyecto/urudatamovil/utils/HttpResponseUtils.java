@@ -12,9 +12,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.Map;
 
-/**
- * Created by juan on 29/09/15.
- */
 public class HttpResponseUtils {
     /* Convierte un httpresponse en un outsourcer */
 
@@ -32,6 +29,7 @@ public class HttpResponseUtils {
         String dir;
         String saldo;
         String cliente;
+        String role;
         try {
             JSONObject outJSON = new JSONObject(body);
 
@@ -43,6 +41,7 @@ public class HttpResponseUtils {
             cel     =  outJSON.get("celular").toString();
             saldo   =  outJSON.get("saldo").toString();
             cliente =  outJSON.get("cliente").toString();
+            role     =  outJSON.get("role").toString();
         } catch (Exception e) {
             Log.v(Constants.TAG, e.getMessage());
             return null;
@@ -55,6 +54,7 @@ public class HttpResponseUtils {
         out.setDireccion(dir);
         out.setSaldo(saldo);
         out.setCliente(cliente);
+        out.setRole(role);
         return out;
     }
 
@@ -79,7 +79,7 @@ public class HttpResponseUtils {
         return peticiones;
     }
 
-    public static PeticionWebClient hashMapToPeticion(Map<String, Object> petHashMap){
+    private static PeticionWebClient hashMapToPeticion(Map<String, Object> petHashMap){
 
         Long idLong,idOutsourcerLong;
         Integer id, idOutsourcer;

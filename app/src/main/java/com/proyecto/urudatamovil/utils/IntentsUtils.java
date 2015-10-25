@@ -59,7 +59,7 @@ public class IntentsUtils {
             marca="";
         }
         result.putExtra("marcaS",marca);
-
+        result.putExtra("role", out.getRole());
         result.putExtra("dir",out.getDireccion());
         result.putExtra("cel", out.getCel());
         result.putExtra("cliente", out.getCliente());

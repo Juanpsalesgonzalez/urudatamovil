@@ -1,8 +1,5 @@
 package com.proyecto.urudatamovil.tasks;
 
-/**
- * Created by juan on 15/02/15.
- */
 
 
 import android.app.Activity;

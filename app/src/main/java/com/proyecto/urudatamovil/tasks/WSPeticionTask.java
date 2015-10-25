@@ -8,9 +8,6 @@ import com.proyecto.urudatamovil.services.WSPeticionServices;
 
 import java.util.ArrayList;
 
-/**
- * Created by juan on 06/08/15.
- */
 
 public class WSPeticionTask extends AsyncTask <String, String, ArrayList<PeticionWebClient>> {
 
@@ -30,7 +27,6 @@ public class WSPeticionTask extends AsyncTask <String, String, ArrayList<Peticio
         String cookie;
 
         user=params[0];
-        pass=params[1];
         cookie=params[2];
         fechaIni=params[3];
         fechaFin=params[4];

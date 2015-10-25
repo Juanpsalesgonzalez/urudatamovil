@@ -205,7 +205,7 @@ public class LoginOutsourcerActivity extends AppCompatActivity {
         return editTextPass.getText().toString();
     }
 
-    public void setUser(String user) {
+    private void setUser(String user) {
         EditText editTextUser = (EditText) findViewById(R.id.id_outsourcer);
         editTextUser.setText(user);
     }

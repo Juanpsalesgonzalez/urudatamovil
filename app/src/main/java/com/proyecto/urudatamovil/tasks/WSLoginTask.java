@@ -9,9 +9,6 @@ import com.proyecto.urudatamovil.services.WSLoginServices;
 import com.proyecto.urudatamovil.services.WSOutsourcerServices;
 import com.proyecto.urudatamovil.utils.IntentsUtils;
 
-/**
- * Created by juan on 14/08/15.
- */
 public class WSLoginTask extends AsyncTask<String,String,Intent> {
 
 

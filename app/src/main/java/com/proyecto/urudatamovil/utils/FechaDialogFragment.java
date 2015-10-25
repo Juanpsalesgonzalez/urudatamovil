@@ -1,8 +1,5 @@
 package com.proyecto.urudatamovil.utils;
 
-/**
- * Created by juan on 04/04/15.
- */
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

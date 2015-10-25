@@ -14,9 +14,6 @@ import com.proyecto.urudatamovil.objects.PeticionWebClient;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by juan on 09/08/15.
- */
 public class PeticionAdapter extends ArrayAdapter<PeticionWebClient> {
 
     private final Context context;

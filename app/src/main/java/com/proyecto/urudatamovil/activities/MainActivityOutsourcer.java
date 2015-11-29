@@ -135,6 +135,12 @@ public class MainActivityOutsourcer extends AppCompatActivity {
                 }
                 firstRun = false;
             }
+            if (estado.equals("out")) {
+                imageSem.setImageResource(R.drawable.rojo28);
+            } else {
+                imageSem.setImageResource(R.drawable.verde28);
+            }
+
             switchES.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                 @Override
